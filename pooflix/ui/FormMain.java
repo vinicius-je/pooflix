@@ -4,6 +4,7 @@ import java.io.Console;
 
 
 import cdu.CDUMain;
+import persistence.DBConnection;
 
 public class FormMain extends Form {
     private CDUMain cdumain = null;
@@ -23,7 +24,7 @@ public class FormMain extends Form {
             System.out.println("1. Cadastrar Série\n");
             System.out.println("2. Cadastrar Episódio\n");
             System.out.println("3. Cadastrar Ator\n");
-            System.out.println("4. Cadastrar de Personagem\n");
+            System.out.println("4. Cadastrar Personagem\n");
             System.out.println("5. Cadastrar Perfomance\n");
             System.out.println("6. Sair\n");
           
@@ -32,7 +33,9 @@ public class FormMain extends Form {
             termina = opcao.equals("6");
 
             if(!termina)
-                cdumain.processaOpcao(opcao);
+                cdumain.processaOpcao(opcao);    
         }
+        DBConnection db = new DBConnection();
+        db.closeConnection();
     }    
 }

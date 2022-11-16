@@ -19,7 +19,7 @@ public class FormPerformance extends Form {
         boolean termina = false;
         String continuar;
 
-        System.out.println("CADASTRANDO ATOR\n");
+        System.out.println("CADASTRANDO PERFORMANCE\n");
 
         while(!termina){
             episodioID = c.readLine("ID episódio: ");

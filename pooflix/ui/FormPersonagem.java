@@ -17,7 +17,7 @@ public class FormPersonagem extends Form {
         boolean termina = false;
         String continuar;
 
-        System.out.println("CADASTRANDO ATOR\n");
+        System.out.println("CADASTRANDO PERSONAGEM\n");
 
         while(!termina){
             id = c.readLine("ID: ");
