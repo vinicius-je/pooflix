@@ -1,10 +1,7 @@
 package ui;
 
 import java.io.Console;
-
-
 import cdu.CDUMain;
-import persistence.DBConnection;
 
 public class FormMain extends Form {
     private CDUMain cdumain = null;
@@ -26,16 +23,15 @@ public class FormMain extends Form {
             System.out.println("3. Cadastrar Ator\n");
             System.out.println("4. Cadastrar Personagem\n");
             System.out.println("5. Cadastrar Perfomance\n");
-            System.out.println("6. Sair\n");
+            System.out.println("6. Relatório\n");
+            System.out.println("7. Sair\n");
           
             opcao = c.readLine("Digite a opção desejada: ");
 
-            termina = opcao.equals("6");
+            termina = opcao.equals("7");
 
             if(!termina)
                 cdumain.processaOpcao(opcao);    
         }
-        DBConnection db = new DBConnection();
-        db.closeConnection();
     }    
 }

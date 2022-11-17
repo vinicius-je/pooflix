@@ -21,6 +21,7 @@ public class CDUMain  extends CDU {
             case "3": execCadAtor(); break;
             case "4": execCadPersonagem(); break;
             case "5": execCadPerformance(); break;
+            case "6": execCadRelatorio(); break;
         }
     }
 
@@ -52,5 +53,11 @@ public class CDUMain  extends CDU {
         FormPerformance telaPerformance = new FormPerformance();
         CDUcadastrarPerformance casoUsoPerformance = new CDUcadastrarPerformance(telaPerformance);
         casoUsoPerformance.exec();        
+    }
+
+    public void execCadRelatorio(){
+        FormRelatorio telaRelatorio = new FormRelatorio();
+        CDURelatorio casoUsoRelatorio = new CDURelatorio(telaRelatorio);
+        casoUsoRelatorio.exec();        
     }
 }
