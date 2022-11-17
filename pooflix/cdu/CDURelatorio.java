@@ -6,13 +6,13 @@ import persistence.DBConnection;
 import ui.*;
 
 public class CDURelatorio extends CDU {
-    FormRelatorio formRelatorio = new FormRelatorio();
-    DBConnection db = new DBConnection();
+    private FormRelatorio formRelatorio;
+    private DBConnection db;
 
-    public CDURelatorio(FormRelatorio formRelatorio){
+    public CDURelatorio(FormRelatorio formRelatorio, DBConnection db){
         this.formRelatorio = formRelatorio;
         formRelatorio.setcdur(this);
-        db.dataBaseCon();
+        this.db = db;
     }
 
     public void exec(){

@@ -1,13 +1,17 @@
 package cdu;
 
+import persistence.DBConnection;
 import ui.*;
 
-public class CDUMain  extends CDU {
+public class CDUMain extends CDU {
     private FormMain formMain;
+    DBConnection db;
 
     public CDUMain(FormMain formMain){
         this.formMain = formMain;
         this.formMain.setcdu(this);
+        this.db = new DBConnection();
+        db.dataBaseCon();
     }  
     
     public void exec() {
@@ -57,7 +61,7 @@ public class CDUMain  extends CDU {
 
     public void execCadRelatorio(){
         FormRelatorio telaRelatorio = new FormRelatorio();
-        CDURelatorio casoUsoRelatorio = new CDURelatorio(telaRelatorio);
+        CDURelatorio casoUsoRelatorio = new CDURelatorio(telaRelatorio, db);
         casoUsoRelatorio.exec();        
     }
 }
