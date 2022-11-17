@@ -9,6 +9,7 @@ public class DBConnection {
         final String USER;
         final String PWD;
 
+
         try {
             con = DriverManager.getConnection(URL, USER, PWD);
             System.out.println("Conexão com o banco de dados realizada com sucesso!");
