@@ -43,13 +43,13 @@ public class CDUMain extends CDU {
 
     public void execCadAtor(){
         FormAtor telaAtor = new FormAtor();
-        CDUcadastrarAtor casoUsoAtor = new CDUcadastrarAtor(telaAtor);
+        CDUcadastrarAtor casoUsoAtor = new CDUcadastrarAtor(telaAtor, db);
         casoUsoAtor.exec();        
     }
 
     public void execCadPersonagem(){
         FormPersonagem telaPersonagem = new FormPersonagem();
-        CDUcadastrarPersonagem casoUsoPersonagem = new CDUcadastrarPersonagem(telaPersonagem);
+        CDUcadastrarPersonagem casoUsoPersonagem = new CDUcadastrarPersonagem(telaPersonagem, db);
         casoUsoPersonagem.exec();        
     }
 
