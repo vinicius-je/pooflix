@@ -4,6 +4,7 @@ import java.sql.*;
 
 import dominio.Ator;
 import dominio.Personagem;
+import dominio.Serie;
 
 public class DBConnection {
     Connection con;
@@ -61,6 +62,17 @@ public class DBConnection {
             System.out.println("Salvando o personagem: " + personagem.getnome() + "no banco de dados..");
         }else{
             System.out.println("Não foi possível salvar o personagem: " + personagem.getnome() + " no banco de dados..");
+        }
+    }
+
+    public void salvarSerie(Serie serie){
+        String sql = String.format("INSERT INTO serie(id, nome) VALUES('%s', '%s')", serie.getid(), serie.gettitulo());
+        int res = runCommand(sql);
+
+        if(res != 0){
+            System.out.println("Salvando a série: " + serie.gettitulo() + "no banco de dados..");
+        }else{
+            System.out.println("Não foi possível salvar a série: " + serie.gettitulo() + " no banco de dados..");
         }
     }
 }
