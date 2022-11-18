@@ -43,6 +43,10 @@ public class Serie {
         return titulo;
     }
 
+    public int getClassEtaria(){
+        return classetaria;
+    }
+
     public String toString(){ 
         String s = "";
         s = "id: " + id + ";\n";

@@ -44,7 +44,7 @@ public class DBConnection {
     }
 
     public void salvarAtor(Ator ator){
-        String sql = String.format("INSERT INTO ator(id, nome, nacionalidade) VALUES('%s', '%s', '%s')", ator.getid(), ator.getnome(), ator.getnacionalidade());
+        String sql = String.format("INSERT INTO ator(idAtor, nomeAtor, nacionalidade) VALUES('%s', '%s', '%s')", ator.getid(), ator.getnome(), ator.getnacionalidade());
         int res = runCommand(sql);
 
         if(res != 0){
@@ -55,7 +55,7 @@ public class DBConnection {
     }
 
     public void salvarPersonagem(Personagem personagem){
-        String sql = String.format("INSERT INTO personagem(id, nome) VALUES('%s', '%s')", personagem.getid(), personagem.getnome());
+        String sql = String.format("INSERT INTO personagem(idPersonagem, nomePersonagem) VALUES('%s', '%s')", personagem.getid(), personagem.getnome());
         int res = runCommand(sql);
 
         if(res != 0){
@@ -66,7 +66,7 @@ public class DBConnection {
     }
 
     public void salvarSerie(Serie serie){
-        String sql = String.format("INSERT INTO serie(id, nome) VALUES('%s', '%s')", serie.getid(), serie.gettitulo());
+        String sql = String.format("INSERT INTO serie(idSerie, nomeSerie, idade) VALUES('%s', '%s', '%d')", serie.getid(), serie.gettitulo(), serie.getClassEtaria());
         int res = runCommand(sql);
 
         if(res != 0){
