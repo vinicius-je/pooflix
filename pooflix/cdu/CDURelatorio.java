@@ -36,16 +36,16 @@ public class CDURelatorio extends CDU {
 
         try {
             while(res.next()){
-                String id = res.getString("id");
-                String titulo =  res.getString("titulo");
+                String id = res.getString("idSerie");
+                String titulo =  res.getString("tituloSerie");
                 
                 // Busca pela categoria da série
-                String catg = "select idserie, idcateg, nome from categserie inner join categoria on(categserie.idcateg = categoria.id and categserie.idserie = " + id + ")";
+                String catg = "select fk_idserie, fk_idcategoria, tipo from categserie inner join categoria on(categserie.fk_idcategoria = categoria.idCategoria and categserie.fk_idserie = " + id + ")";
                 ResultSet resCtg = db.queryTable(catg);
 
                 List <String> categoria = new ArrayList<>();
                 while(resCtg.next()){
-                    categoria.add(resCtg.getString("nome"));
+                    categoria.add(resCtg.getString("tipo"));
                 }
 
                 System.out.println("ID: " + id + " - Titulo: " + titulo + " - Categoria: " + categoria);
@@ -62,15 +62,13 @@ public class CDURelatorio extends CDU {
 
         try {
             while(res.next()){
-                String id = res.getString("id");
-                String numeroEP =  res.getString("numep");
+                String id = res.getString("idEpisodio");
+                //String fkSerie =  res.getString("fk_idserie");
                 String temporada = res.getString("temporada");
-                String titulo =  res.getString("titulo");
+                String titulo =  res.getString("tituloEpisodio");
                 String resumo =  res.getString("resumo");
-                System.out.println("ID: " + id + " EP: " + numeroEP +
-                                " Temporada: " + temporada + " titulo: " + titulo + 
-                                " Resumo " + resumo);
-
+                System.out.println("ID: " + id + " EP: " + " Temporada: " + 
+                                    temporada + " titulo: " + titulo + " Resumo " + resumo);
             }   
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -83,8 +81,8 @@ public class CDURelatorio extends CDU {
 
         try {
             while(res.next()){
-                String id = res.getString("id");
-                String nome =  res.getString("nome");
+                String id = res.getString("idAtor");
+                String nome =  res.getString("nomeAtor");
                 String nacionalidade = res.getString("nacionalidade");
                 System.out.println("ID: " + id + " Nome: " + nome + " Nacionalidade: " + nacionalidade);
 
@@ -100,8 +98,8 @@ public class CDURelatorio extends CDU {
 
         try {
             while(res.next()){
-                String id = res.getString("id");
-                String nome =  res.getString("nome");
+                String id = res.getString("idPersonagem");
+                String nome =  res.getString("nomePersonagem");
                 System.out.println("ID: " + id + " Nome: " + nome);
             }   
         } catch (Exception e) {
