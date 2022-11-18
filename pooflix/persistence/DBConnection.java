@@ -9,9 +9,9 @@ import dominio.Serie;
 public class DBConnection {
     Connection con;
     public void dataBaseCon() {
-        final String URL;
-        final String USER;
-        final String PWD;
+        final String URL = "jdbc:postgresql://babar.db.elephantsql.com/stmhqghf";
+        final String USER = "stmhqghf";
+        final String PWD = "ddks5Z_6nS_Ef4sZLU64ZpCcE9-4RpIV";
 
         try {
             con = DriverManager.getConnection(URL, USER, PWD);
