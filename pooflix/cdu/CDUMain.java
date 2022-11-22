@@ -31,7 +31,7 @@ public class CDUMain extends CDU {
 
     public void execCadSerie(){
         FormSerie telaSerie = new FormSerie();
-        CDUcadastrarSerie casoUsoSerie = new CDUcadastrarSerie(telaSerie);
+        CDUcadastrarSerie casoUsoSerie = new CDUcadastrarSerie(telaSerie, db);
         casoUsoSerie.exec();
     }
 

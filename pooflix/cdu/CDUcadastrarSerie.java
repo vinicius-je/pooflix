@@ -2,14 +2,17 @@ package cdu;
 
 import ui.*;
 import dominio.*;
+import persistence.DBConnection;
 
 public class CDUcadastrarSerie  extends CDU {
     private Serie serie;
     private FormSerie formSerie;
+    DBConnection db;
 
-    public CDUcadastrarSerie(FormSerie formSerie){
+    public CDUcadastrarSerie(FormSerie formSerie, DBConnection db){
         this.formSerie = formSerie;
         this.formSerie.setcdu(this);
+        this.db = db;
     }
 
     public void exec() {
@@ -23,7 +26,7 @@ public class CDUcadastrarSerie  extends CDU {
 
         serie = new Serie(id,titulo,idade);
 
-        //bd.salvarSerie(serie);
-        System.out.println("Salvando no banco de dados.." + serie);
+        db.salvarSerie(serie);
+        // System.out.println("Salvando no banco de dados.." + serie);
     }
 }

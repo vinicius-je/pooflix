@@ -66,7 +66,7 @@ public class DBConnection {
     }
 
     public void salvarSerie(Serie serie){
-        String sql = String.format("INSERT INTO serie(idSerie, nomeSerie, idade) VALUES('%s', '%s', '%d')", serie.getid(), serie.gettitulo(), serie.getClassEtaria());
+        String sql = String.format("INSERT INTO serie(idSerie, tituloSerie, idade) VALUES('%s', '%s', '%d')", serie.getid(), serie.gettitulo(), serie.getClassEtaria());
         int res = runCommand(sql);
 
         if(res != 0){

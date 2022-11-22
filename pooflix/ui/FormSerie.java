@@ -28,9 +28,9 @@ public class FormSerie extends Form {
             continuar = c.readLine("Deseja continuar?(s/n): ");
             termina = continuar.toLowerCase().equals("n");
             // Remover esse (if), pois o mesmo não permite salvar a última série cadastrada
-            if(!termina){
-                cducs.salvarSerie();
-            }
+            
+            cducs.salvarSerie();
+            
         }
     }
 
