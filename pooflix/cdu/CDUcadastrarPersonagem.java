@@ -1,18 +1,21 @@
 package cdu;
 
 import ui.*;
+
+import java.sql.Connection;
+
 import dominio.*;
-import persistence.DBConnection;
+import persistence.DAOPersonagem;
 
 public class CDUcadastrarPersonagem extends CDU {
     private Personagem personagem;
     private FormPersonagem formPersonagem;
-    DBConnection db;
+    Connection con;
 
-    public CDUcadastrarPersonagem(FormPersonagem formPersonagem, DBConnection db){
+    public CDUcadastrarPersonagem(FormPersonagem formPersonagem, Connection con){
         this.formPersonagem = formPersonagem;
         this.formPersonagem.setcdupe(this);
-        this.db = db;
+        this.con = con;
     }
 
     public void exec(){
@@ -24,8 +27,13 @@ public class CDUcadastrarPersonagem extends CDU {
         String nome = formPersonagem.getnome();
 
         personagem = new Personagem(id, nome);
-        db.salvarPersonagem(personagem);
-        //bd.salvarPersonagem
-        //System.out.println("Salvando no banco de dados..." + personagem); 
+        DAOPersonagem dao = new DAOPersonagem(con);
+        int rs = dao.add(personagem);
+
+        if(rs == 0){
+            System.out.println("Personagem: " + personagem.getnome() + " cadastrado!");
+        }else{
+            System.out.println("Não foi possível salvar o personagem: " + personagem.getnome() + " no banco de dados!");
+        }
     }
 }

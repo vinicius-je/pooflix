@@ -59,7 +59,7 @@ public class CDUMain extends CDU {
 
     public void execCadPersonagem(){
         FormPersonagem telaPersonagem = new FormPersonagem();
-        CDUcadastrarPersonagem casoUsoPersonagem = new CDUcadastrarPersonagem(telaPersonagem, db);
+        CDUcadastrarPersonagem casoUsoPersonagem = new CDUcadastrarPersonagem(telaPersonagem, db.getConnection());
         casoUsoPersonagem.exec();        
     }
 

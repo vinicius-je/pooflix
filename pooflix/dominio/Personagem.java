@@ -2,7 +2,7 @@ package dominio;
 
 import java.util.LinkedList;
 
-public class Personagem {
+public class Personagem implements OBJPOOFlix {
 	private String id;
 	private String nome;
     private LinkedList<Performance> perfomances;
