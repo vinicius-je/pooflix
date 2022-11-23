@@ -41,7 +41,7 @@ public class FormPerformance extends Form {
         return personagemID;
     }
 
-    public String getator(){
+    public String getidator(){
         return atorID;
     }
 }

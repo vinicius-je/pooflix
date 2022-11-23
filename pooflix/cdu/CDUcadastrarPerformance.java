@@ -2,14 +2,17 @@ package cdu;
 
 import ui.*;
 import dominio.*;
+import persistence.DBConnection;
 
 public class CDUcadastrarPerformance extends CDU{
     private Performance performance;
     private FormPerformance formPerformance;
+    DBConnection db;
 
-    public CDUcadastrarPerformance(FormPerformance formPerformance){
+    public CDUcadastrarPerformance(FormPerformance formPerformance, DBConnection db){
         this.formPerformance = formPerformance;
         this.formPerformance.setcduper(this);
+        this.db = db;
     }
 
     public void exec(){
@@ -19,15 +22,9 @@ public class CDUcadastrarPerformance extends CDU{
     public void salvarPerformance(){
         String episodioID = formPerformance.getidep();
         String personagemID = formPerformance.getidperson();
-        String atorID = formPerformance.getator();
+        String atorID = formPerformance.getidator();
 
-        /*
-         * Pegar os dados de episodio, personagem e ator do banco de dados e criar uma classe para passar
-         * na instância de Performance
-         */
-
-        //performance = new Performance(episodio, personagem, ator);
-        //bd.salvarPerformance
-        System.out.println("Salvando no banco de dados..." + performance); 
+        performance = new Performance(episodioID, personagemID, atorID);
+        db.salvarPerformance(performance);
     }
 }

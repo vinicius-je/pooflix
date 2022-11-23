@@ -55,7 +55,7 @@ public class CDUMain extends CDU {
 
     public void execCadPerformance(){
         FormPerformance telaPerformance = new FormPerformance();
-        CDUcadastrarPerformance casoUsoPerformance = new CDUcadastrarPerformance(telaPerformance);
+        CDUcadastrarPerformance casoUsoPerformance = new CDUcadastrarPerformance(telaPerformance, db);
         casoUsoPerformance.exec();        
     }
 

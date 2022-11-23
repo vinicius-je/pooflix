@@ -3,6 +3,7 @@ package persistence;
 import java.sql.*;
 
 import dominio.Ator;
+import dominio.Performance;
 import dominio.Personagem;
 import dominio.Serie;
 
@@ -62,6 +63,17 @@ public class DBConnection {
             System.out.println("Salvando o personagem: " + personagem.getnome() + "no banco de dados..");
         }else{
             System.out.println("Não foi possível salvar o personagem: " + personagem.getnome() + " no banco de dados..");
+        }
+    }
+
+    public void salvarPerformance(Performance performance){
+        String sql = String.format("INSERT INTO performance(fk_idepisodio, fk_idpersonagem, fk_idator) VALUES('%s', '%s', '%s')", performance.getidep(), performance.getidperson(), performance.getidator());
+        int res = runCommand(sql);
+
+        if(res != 0){
+            System.out.println("Performance salva no banco de dados com sucesso!");
+        }else{
+            System.out.println("Não foi possível salvar a performance no banco de dados!");
         }
     }
 

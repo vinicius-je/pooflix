@@ -1,25 +1,25 @@
 package dominio;
 
 public class Performance {
-    private Episodio episodio;
-    private Personagem personagem;
-    private Ator ator;
+    private String episodioID;
+    private String personagemID;
+    private String atorID;
 
-    public Performance(Episodio epi,Personagem person,Ator ator){
-        episodio = epi;
-        personagem = person;
-        this.ator = ator;
+    public Performance(String episodioID,String personagemID,String atorID){
+        this.episodioID = episodioID;
+        this.personagemID = personagemID;
+        this.atorID = atorID;
     }
 
-    public Episodio getidep(){
-        return episodio;
+    public String getidep(){
+        return episodioID;
     }
 
-    public Personagem getidperson(){
-        return personagem;
+    public String getidperson(){
+        return personagemID;
     }
 
-    public Ator getator(){
-        return ator;
+    public String getidator(){
+        return atorID;
     }
 }
