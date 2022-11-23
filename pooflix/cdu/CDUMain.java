@@ -1,21 +1,31 @@
 package cdu;
 
+import java.sql.Connection;
+
 import persistence.DBConnection;
 import ui.*;
 
 public class CDUMain extends CDU {
     private FormMain formMain;
-    DBConnection db;
+    private String url = "jdbc:postgresql://babar.db.elephantsql.com/stmhqghf";
+    private String usuario = "stmhqghf";
+    private String senha = "ddks5Z_6nS_Ef4sZLU64ZpCcE9-4RpIV";
+    DBConnection db = null;
+    Connection con = null;
 
     public CDUMain(FormMain formMain){
         this.formMain = formMain;
         this.formMain.setcdu(this);
-        this.db = new DBConnection();
-        db.dataBaseCon();
     }  
     
     public void exec() {
-        formMain.exibe();
+        db = new DBConnection(url, usuario, senha);
+        con = db.connection();
+
+        if(con != null){
+            System.out.println("Banco de dados conectado com sucesso!");
+            formMain.exibe();
+        }
     }
 
     public void processaOpcao(String opcao){
@@ -31,7 +41,7 @@ public class CDUMain extends CDU {
 
     public void execCadSerie(){
         FormSerie telaSerie = new FormSerie();
-        CDUcadastrarSerie casoUsoSerie = new CDUcadastrarSerie(telaSerie, db);
+        CDUcadastrarSerie casoUsoSerie = new CDUcadastrarSerie(telaSerie, db.getConnection());
         casoUsoSerie.exec();
     }
 

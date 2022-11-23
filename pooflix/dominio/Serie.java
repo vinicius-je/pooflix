@@ -3,7 +3,7 @@ package dominio;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class Serie {
+public class Serie implements OBJPOOFlix {
     private String id;
     private String titulo;
     private int classetaria;
@@ -51,7 +51,7 @@ public class Serie {
         String s = "";
         s = "id: " + id + ";\n";
         s = s + "Titulo: " + titulo + ";\n";
-        s = s + "Class etária: " + classetaria + ";\n";
+        s = s + "Classe etária: " + classetaria + ";\n";
         return s;
     }
 }
