@@ -2,24 +2,27 @@ package cdu;
 
 import ui.*;
 import dominio.*;
+import persistence.DBConnection;
 
 public class CDUcadastrarEpis extends CDU {
     private Episodio episodio = null;
     private FormEpisodio formEpisodio;
+    DBConnection db;
 
     public void exec() {
         formEpisodio.exibe();
     }
 
-    public CDUcadastrarEpis(FormEpisodio formEpisodio){
+    public CDUcadastrarEpis(FormEpisodio formEpisodio, DBConnection db){
         this.formEpisodio = formEpisodio;
         this.formEpisodio.setcdu(this);
+        this.db = db;
+
     }
 
     public String getNomeSerie(int idserie) {
-        // Serie serie = bd.getSerie(idserie); EM OBRAS.
-        // return serie.gettitulo();
-        return "Black Mirror";
+        Serie serie = db.getSerie(idserie); 
+        return serie.gettitulo();
     }
 
     public void salvarEpisodio() {
@@ -29,9 +32,8 @@ public class CDUcadastrarEpis extends CDU {
         String titulo = formEpisodio.gettitulo();
         String resumo = formEpisodio.getresumo();
 
-        episodio = new Episodio(id,titulo,temporada,resumo);   
+        episodio = new Episodio(id, titulo, temporada, resumo, idserie);   
 
-        //bd.salvarEpisodio(episodio);
-        System.out.println("Salvando no banco de dados.." + episodio);
+        db.salvarEpisodio(episodio);
     }
 }

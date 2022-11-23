@@ -37,7 +37,7 @@ public class CDUMain extends CDU {
 
     public void execCadEpisodio(){
         FormEpisodio telaEpisodio = new FormEpisodio();
-        CDUcadastrarEpis casoUsoEpis = new CDUcadastrarEpis(telaEpisodio);
+        CDUcadastrarEpis casoUsoEpis = new CDUcadastrarEpis(telaEpisodio, db);
         casoUsoEpis.exec();        
     }
 

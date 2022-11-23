@@ -44,7 +44,8 @@ public class FormEpisodio extends Form{
                 temporada = c.readLine("@" + nomeserie + ">Temporada: ");
                 titulo = c.readLine("@" + nomeserie + ">Titulo: ");
                 resumo = c.readLine("@" + nomeserie + ">Resumo: ");
-
+                
+                cduce.salvarEpisodio();
                 continuar = c.readLine("(S)erie (E)pisodio (T)erminar): ");
 
                 if(continuar.toLowerCase().equals("s")){
@@ -55,7 +56,7 @@ public class FormEpisodio extends Form{
                 else
                     if(continuar.toLowerCase().equals("e")){
                         // salvar episodio no banco de dados.
-                        cduce.salvarEpisodio(); // EM OBRAS.
+                        //cduce.salvarEpisodio(); // EM OBRAS.
                         leserie = false;
                         leepisodio = true;
                         termina = false;                    

@@ -7,23 +7,25 @@ public class Episodio {
     private String temporada;
     private String titulo;
     private Serie serie;
+    private String idserie;
     public String resumo;
     private LinkedList<Performance> perfomances;
 
-    public Episodio(String id, String titulo, String temporada, String resumo){
+    public Episodio(String id, String titulo, String temporada, String resumo, String idserie){
         this.id = id;
         this.titulo = titulo;
         this.temporada = temporada;
         this.resumo = resumo;
+        this.idserie = idserie;
     }
 
     public void adperformance(Performance p){
         perfomances.add(p);
     }
 
-    public Serie getserie(){
-        return serie;
-    }
+    // public Serie getserie(){
+    //     return serie;
+    // }
 
     public void setserie(Serie s){
         if(serie == null){
@@ -49,6 +51,10 @@ public class Episodio {
 
     public String getresumo(){ 
         return resumo;
+    }
+
+    public String getidserie(){ 
+        return idserie;
     }
 
     public String toString(){ 

@@ -1,11 +1,7 @@
 package persistence;
 
 import java.sql.*;
-
-import dominio.Ator;
-import dominio.Performance;
-import dominio.Personagem;
-import dominio.Serie;
+import dominio.*;
 
 public class DBConnection {
     Connection con;
@@ -26,6 +22,20 @@ public class DBConnection {
         try {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(sql);
+            return rs;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public ResultSet queryTeste(String sql){
+        try {
+            Statement st = con.createStatement();
+            boolean isResult = st.execute(sql);
+            ResultSet rs = null;
+            if(isResult)
+                rs = st.getResultSet();
             return rs;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -86,5 +96,36 @@ public class DBConnection {
         }else{
             System.out.println("Não foi possível salvar a série: " + serie.gettitulo() + " no banco de dados..");
         }
+    }
+
+    public void salvarEpisodio(Episodio episodio){
+        String sql = String.format("INSERT INTO episodio(idepisodio, fk_idserie, temporada, tituloepisodio, resumo) VALUES('%s', '%s', '%s', '%s', '%s')", episodio.getid(), episodio.getidserie(), episodio.gettemporada(), episodio.gettitulo(), episodio.getresumo());
+        int res = runCommand(sql);
+
+        if(res != 0){
+            System.out.println("Salvando o epsódio: " + episodio.gettitulo() + "no banco de dados..");
+        }else{
+            System.out.println("Não foi possível salvar o epsódio: " + episodio.gettitulo() + " no banco de dados..");
+        }
+    }
+
+    public Serie getSerie(int idSerie){
+        String sql = String.format("SELECT * FROM serie where idserie = %s", idSerie);
+        ResultSet res = queryTable(sql);
+
+        try {
+            Serie serie = null;
+            while(res.next()){
+                String id = res.getString("idSerie");
+                String titulo =  res.getString("tituloSerie");
+                int classeEtaria = Integer.parseInt(res.getString("idade"));
+                serie = new Serie(id, titulo, classeEtaria);
+                return serie;
+            }
+            return serie;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }        
     }
 }
