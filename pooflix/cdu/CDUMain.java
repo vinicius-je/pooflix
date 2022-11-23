@@ -53,7 +53,7 @@ public class CDUMain extends CDU {
 
     public void execCadAtor(){
         FormAtor telaAtor = new FormAtor();
-        CDUcadastrarAtor casoUsoAtor = new CDUcadastrarAtor(telaAtor, db);
+        CDUcadastrarAtor casoUsoAtor = new CDUcadastrarAtor(telaAtor, db.getConnection());
         casoUsoAtor.exec();        
     }
 

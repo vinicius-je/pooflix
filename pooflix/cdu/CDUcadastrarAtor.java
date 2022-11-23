@@ -1,18 +1,21 @@
 package cdu;
 
 import ui.*;
+
+import java.sql.Connection;
+
 import dominio.*;
-import persistence.DBConnection;
+import persistence.DAOAtor;
 
 public class CDUcadastrarAtor extends CDU {
     private Ator ator;
     private FormAtor formAtor;
-    DBConnection db;
+    Connection con;
 
-    public CDUcadastrarAtor(FormAtor formAtor, DBConnection db){
+    public CDUcadastrarAtor(FormAtor formAtor, Connection con){
         this.formAtor = formAtor;
         this.formAtor.setcduca(this);
-        this.db = db;
+        this.con = con;
     }
 
     public void exec(){
@@ -25,8 +28,13 @@ public class CDUcadastrarAtor extends CDU {
         String nacionalidade = formAtor.getnacionalidade();
         
         ator = new Ator(id, nome, nacionalidade);
-        db.salvarAtor(ator);
-        //bd.salvarAtor(ator)
-        //System.out.println("Salvando no banco de dados.." + ator.getnome());
+        DAOAtor dao = new DAOAtor(con);
+        int rs = dao.add(ator);
+        
+        if(rs == 0){
+            System.out.println("Ator: " + ator.getnome() +" cadastrado!");
+        }else{
+            System.out.println("Não foi possível salvar o ator: " + ator.getnome() +" no banco de dados!");
+        }
     }
 }
