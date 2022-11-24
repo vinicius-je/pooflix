@@ -1,12 +1,9 @@
 package cdu;
 
 import ui.*;
-
-import java.sql.Connection;
-
 import dominio.*;
+import java.sql.Connection;
 import persistence.DAOSerie;
-import persistence.DBConnection;
 
 public class CDUcadastrarSerie  extends CDU {
     private Serie serie;

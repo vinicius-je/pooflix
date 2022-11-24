@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/* REFAZER A CLASSE RELATÓRIO */
+
 import persistence.DBConnection;
 import ui.*;
 

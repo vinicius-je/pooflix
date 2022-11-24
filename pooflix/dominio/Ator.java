@@ -34,4 +34,12 @@ public class Ator implements OBJPOOFlix {
 	public String getnacionalidade(){
         return nacionalidade;
 	}
+
+	public String toString(){ 
+        String s = "";
+        s = "id: " + id + ";\n";
+        s = s + "Nome: " + nome + ";\n";
+		s = s + "Nacionalidade: " + nacionalidade + ";\n";
+        return s;
+    }
 }

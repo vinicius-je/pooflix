@@ -1,7 +1,6 @@
 package cdu;
 
 import java.sql.Connection;
-
 import persistence.DBConnection;
 import ui.*;
 

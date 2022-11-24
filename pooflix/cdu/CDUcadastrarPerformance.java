@@ -1,10 +1,8 @@
 package cdu;
 
 import ui.*;
-
-import java.sql.Connection;
-
 import dominio.*;
+import java.sql.Connection;
 import persistence.DAOPerformance;
 
 public class CDUcadastrarPerformance extends CDU{

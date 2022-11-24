@@ -23,4 +23,11 @@ public class Personagem implements OBJPOOFlix {
 	public String getnome(){
         return nome;
 	}
+
+	public String toString(){ 
+        String s = "";
+        s = "id: " + id + ";\n";
+        s = s + "Nome: " + nome + ";\n";
+        return s;
+    }
 }

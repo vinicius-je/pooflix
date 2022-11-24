@@ -1,12 +1,9 @@
 package cdu;
 
 import ui.*;
-
-import java.sql.Connection;
-
 import dominio.*;
+import java.sql.Connection;
 import persistence.DAOEpisodio;
-import persistence.DBConnection;
 
 public class CDUcadastrarEpis extends CDU {
     private Episodio episodio = null;
