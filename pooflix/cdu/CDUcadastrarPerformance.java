@@ -1,18 +1,21 @@
 package cdu;
 
 import ui.*;
+
+import java.sql.Connection;
+
 import dominio.*;
-import persistence.DBConnection;
+import persistence.DAOPerformance;
 
 public class CDUcadastrarPerformance extends CDU{
     private Performance performance;
     private FormPerformance formPerformance;
-    DBConnection db;
+    Connection con;
 
-    public CDUcadastrarPerformance(FormPerformance formPerformance, DBConnection db){
+    public CDUcadastrarPerformance(FormPerformance formPerformance, Connection con){
         this.formPerformance = formPerformance;
         this.formPerformance.setcduper(this);
-        this.db = db;
+        this.con = con;
     }
 
     public void exec(){
@@ -25,6 +28,13 @@ public class CDUcadastrarPerformance extends CDU{
         String atorID = formPerformance.getidator();
 
         performance = new Performance(episodioID, personagemID, atorID);
-        db.salvarPerformance(performance);
+        DAOPerformance dao = new DAOPerformance(con);
+        int rs = dao.add(performance);
+        
+        if(rs == 0){
+            System.out.println("Performance cadastrado com sucesso!");
+        }else{
+            System.out.println("Não foi possível salvar a performance no banco de dados!");
+        }
     }
 }

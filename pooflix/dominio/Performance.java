@@ -1,6 +1,6 @@
 package dominio;
 
-public class Performance {
+public class Performance implements OBJPOOFlix {
     private String episodioID;
     private String personagemID;
     private String atorID;
