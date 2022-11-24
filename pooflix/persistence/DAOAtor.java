@@ -26,9 +26,9 @@ public class DAOAtor {
         }
     }
 
-    public List<OBJPOOFlix> lista() {
+    public List<Ator> lista() {
 		try {
-			List<OBJPOOFlix> atores = new ArrayList<OBJPOOFlix>();
+			List<Ator> atores = new ArrayList<Ator>();
 
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM ator");
@@ -41,7 +41,7 @@ public class DAOAtor {
 				atores.add(ator);
 			}
 			rs.close();
-			connection.close();
+			// connection.close();
 			
 			return atores;			
 		} catch (SQLException e) {

@@ -1,22 +1,19 @@
 package cdu;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
-/* REFAZER A CLASSE RELATÓRIO */
-
-import persistence.DBConnection;
 import ui.*;
+import java.sql.*;
+import dominio.*;
+import persistence.*;
+import java.util.List;
 
 public class CDURelatorio extends CDU {
     private FormRelatorio formRelatorio;
-    private DBConnection db;
+    private Connection con;
 
-    public CDURelatorio(FormRelatorio formRelatorio, DBConnection db){
+    public CDURelatorio(FormRelatorio formRelatorio, Connection con){
         this.formRelatorio = formRelatorio;
         formRelatorio.setcdur(this);
-        this.db = db;
+        this.con = con;
     }
 
     public void exec(){
@@ -33,79 +30,38 @@ public class CDURelatorio extends CDU {
     }
 
     public void querySerieTable(){
-        String sql = "SELECT * FROM serie";
-        ResultSet res = db.queryTable(sql);
+        DAOSerie dao = new DAOSerie(con);
+        List<Serie> series = dao.lista();
 
-        try {
-            while(res.next()){
-                String id = res.getString("idSerie");
-                String titulo =  res.getString("tituloSerie");
-                
-                // Busca pela categoria da série
-                String catg = "select fk_idserie, fk_idcategoria, tipo from categserie inner join categoria on(categserie.fk_idcategoria = categoria.idCategoria and categserie.fk_idserie = " + id + ")";
-                ResultSet resCtg = db.queryTable(catg);
-
-                List <String> categoria = new ArrayList<>();
-                while(resCtg.next()){
-                    categoria.add(resCtg.getString("tipo"));
-                }
-
-                System.out.println("ID: " + id + " - Titulo: " + titulo + " - Categoria: " + categoria);
-                
-            }   
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        for(Serie serie : series){
+            System.out.println(serie);
         }
     }
 
     public void queryEpisodioTable(){
-        String sql = "SELECT * FROM episodio";
-        ResultSet res = db.queryTable(sql);
+        DAOEpisodio dao = new DAOEpisodio(con);
+        List<Episodio> episodios = dao.lista();
 
-        try {
-            while(res.next()){
-                String id = res.getString("idEpisodio");
-                //String fkSerie =  res.getString("fk_idserie");
-                String temporada = res.getString("temporada");
-                String titulo =  res.getString("tituloEpisodio");
-                String resumo =  res.getString("resumo");
-                System.out.println("ID: " + id + " EP: " + " Temporada: " + 
-                                    temporada + " titulo: " + titulo + " Resumo " + resumo);
-            }   
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        for(Episodio episodio : episodios){
+            System.out.println(episodio);
         }
     }
 
     public void queryAtorTable(){
-        String sql = "SELECT * FROM ator";
-        ResultSet res = db.queryTable(sql);
+        DAOAtor dao = new DAOAtor(con);
+        List<Ator> atores = dao.lista();
 
-        try {
-            while(res.next()){
-                String id = res.getString("idAtor");
-                String nome =  res.getString("nomeAtor");
-                String nacionalidade = res.getString("nacionalidade");
-                System.out.println("ID: " + id + " Nome: " + nome + " Nacionalidade: " + nacionalidade);
-
-            }   
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        for(Ator ator : atores){
+            System.out.println(ator);
         }
     }
 
     public void queryPersonagemTable(){
-        String sql = "SELECT * FROM personagem";
-        ResultSet res = db.queryTable(sql);
+        DAOPersonagem dao = new DAOPersonagem(con);
+        List<Personagem> personagens = dao.lista();
 
-        try {
-            while(res.next()){
-                String id = res.getString("idPersonagem");
-                String nome =  res.getString("nomePersonagem");
-                System.out.println("ID: " + id + " Nome: " + nome);
-            }   
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        for(Personagem personagem : personagens){
+            System.out.println(personagem);
         }
     }
 }

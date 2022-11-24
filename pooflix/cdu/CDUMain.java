@@ -70,7 +70,7 @@ public class CDUMain extends CDU {
 
     public void execCadRelatorio(){
         FormRelatorio telaRelatorio = new FormRelatorio();
-        CDURelatorio casoUsoRelatorio = new CDURelatorio(telaRelatorio, db);
+        CDURelatorio casoUsoRelatorio = new CDURelatorio(telaRelatorio, db.getConnection());
         casoUsoRelatorio.exec();        
     }
 }

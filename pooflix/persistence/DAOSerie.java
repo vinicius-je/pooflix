@@ -26,9 +26,9 @@ public class DAOSerie {
         }
     }
 
-    public List<OBJPOOFlix> lista() {
+    public List<Serie> lista() {
 		try {
-			List<OBJPOOFlix> series = new ArrayList<OBJPOOFlix>();
+			List<Serie> series = new ArrayList<Serie>();
 
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM serie");
@@ -41,7 +41,7 @@ public class DAOSerie {
 				series.add(serie);
 			}
 			rs.close();
-			connection.close();
+			// connection.close();
 			
 			return series;			
 		} catch (SQLException e) {

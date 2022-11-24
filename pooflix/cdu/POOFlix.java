@@ -1,11 +1,12 @@
 package cdu;
-
 import ui.*;
 
 /*
  * POOFLIX 
- * CADASTRA: Ator, Personagem, Performance, Serie e Episódio
- * FALTA: Adicionar Categorias e Episódios em series
+ * Autor: Vinícius Estevam
+ * Cadastra: Ator, Personagem, Performance, Serie e Episódio
+ * Relatório: Série, Episódio, Ator e Personagem
+ * Pendente: Adicionar Categorias, Episódios em series, atualizar e deletar no banco de dados
  */
 
 public class POOFlix {

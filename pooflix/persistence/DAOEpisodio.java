@@ -25,12 +25,12 @@ public class DAOEpisodio {
         }
     }
 
-    public List<OBJPOOFlix> lista() {
+    public List<Episodio> lista() {
 		try {
-			List<OBJPOOFlix> personagens = new ArrayList<OBJPOOFlix>();
+			List<Episodio> episodios = new ArrayList<Episodio>();
 
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM personagem");
+            ResultSet rs = st.executeQuery("SELECT * FROM episodio");
 			while (rs.next()) {
                 String idepisodio = rs.getString("idepisodio");
                 String idserie = rs.getString("fk_idserie");
@@ -40,12 +40,12 @@ public class DAOEpisodio {
 
 				Episodio episodio = new Episodio(idepisodio, titulo, temporada, resumo, idserie);
 				
-				personagens.add(episodio);
+				episodios.add(episodio);
 			}
 			rs.close();
-			connection.close();
+			// connection.close();
 			
-			return personagens;			
+			return episodios;			
 		} catch (SQLException e) {
 			System.out.println("Problemas em DAOEpisodio.lista" + e.getMessage());
 			return null;
