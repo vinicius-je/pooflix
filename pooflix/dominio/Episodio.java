@@ -2,7 +2,7 @@ package dominio;
 
 import java.util.LinkedList;
 
-public class Episodio {
+public class Episodio implements OBJPOOFlix {
     private String id;
     private String temporada;
     private String titulo;
