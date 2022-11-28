@@ -67,6 +67,62 @@ public class FormEpisodio extends Form{
         } 
     } 
 
+    public void updateEpisodio(){
+        //Faz o update de episódio de acordo com o que o usuário decidir mudar
+        Console c = System.console();
+        boolean termina = false;
+        String continuar;
+        String updt;
+ 
+        System.out.println("UPDATE DE DADOS DE EPISÓDIO\n");
+
+        while(!termina){
+            id = c.readLine("ID do episódio que deseja mudar os dados: ");
+            //verificação, para saber se id de episódio existe no banco de dados
+            if(id.equals(this.getid())){
+               updt = c.readLine("O que deseja mudar deste episódio? Digite (Te)mporada, (Ti)tulo, (R)esumo: ");
+               if(updt.equals("Te")){
+                idserie = c.readLine("Qual será o novo nome/id da temporada? ");
+                if(temporada.equals(this.gettemporada())){
+                    idserie = c.readLine("Esse nome/id de temporada já existe no banco de dados, tente outro: ");
+                }
+
+               }else if(updt.equals("Ti")){
+                titulo = c.readLine("Qual será o novo título do episódio? ");
+                //Precisa verificar se o título já existe no banco de dados ou não?
+               }else if(updt.equals("R")){
+                resumo = c.readLine("Qual será o novo resumo desse episódio? ");
+               }
+            }else{
+                System.out.println("Erro! ID não encontrado no banco de dados, tente novamente");
+                continuar = c.readLine("Deseja tentar novamente? (s/n): ");
+                termina = continuar.toLowerCase().equals("n");  
+            }
+            continuar = c.readLine("Deseja mudar mais alguma coisa? (s/n): ");
+            termina = continuar.toLowerCase().equals("n");
+        }
+
+        //cduce.updateEpisodio();
+
+    }
+
+    public void deleteEpisodio(){
+        //Deleta um ator do banco de dados
+        Console c = System.console();
+        String del;
+
+        System.out.println("DELETANDO EPISÓDIO\n");
+
+        id = c.readLine("ID do episódio que deseja deletar do banco de dados");
+        //verificando se o id existe no banco de dados
+        if(id.equals(this.getid())){
+            //cduca.deleteEpisodio();
+            System.out.printf("Episódio %s deletado com sucesso do banco de dados..", this.gettitulo());
+        }
+
+    }
+
+
     public String getid() { return id;};
     public String getidserie() { return idserie;}
     public String gettemporada() { return temporada;}

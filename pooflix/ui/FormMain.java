@@ -23,6 +23,8 @@ public class FormMain extends Form {
             System.out.println("3. Cadastrar Ator\n");
             System.out.println("4. Cadastrar Personagem\n");
             System.out.println("5. Cadastrar Perfomance\n");
+            //System.out.println("6. Update\n");
+            //System.out.println("7. Delete\n");
             System.out.println("6. Relatório\n");
             System.out.println("7. Sair\n");
           

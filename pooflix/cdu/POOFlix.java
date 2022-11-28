@@ -3,7 +3,7 @@ import ui.*;
 
 /*
  * POOFLIX 
- * Autor: Vinícius Estevam
+ * Autor: Vinícius Estevam e Isabella Sampaio
  * Cadastra: Ator, Personagem, Performance, Serie e Episódio
  * Relatório: Série, Episódio, Ator e Personagem
  * Pendente: Adicionar Categorias, Episódios em series, atualizar e deletar no banco de dados
