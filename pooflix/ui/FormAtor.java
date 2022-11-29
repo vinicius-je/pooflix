@@ -2,7 +2,6 @@ package ui;
 import java.io.Console;
 
 import cdu.CDUAtualizarAtor;
-import cdu.CDURelatorio;
 import cdu.CDUcadastrarAtor;
 import dominio.Ator;
 
