@@ -26,6 +26,46 @@ public class DAOAtor {
         }
     }
 
+    public int update(OBJPOOFlix obj){
+        try {
+            Ator ator = (Ator) obj;	
+            String sql = null;
+
+            if(ator.getnome() != null)
+                sql = String.format("UPDATE ator set nomeator = '"+ ator.getnome() +"' where idator = " + ator.getid());
+            if(ator.getnacionalidade() != null)
+                sql = String.format("UPDATE ator set nacionalidade = '"+ ator.getnacionalidade() +"' where idator = " + ator.getid());
+            
+            Statement st = connection.createStatement();
+            st.execute(sql);
+            return 0;
+        } catch (SQLException e) {
+            System.out.println("Problemas em DAOAtor.update" + e.getMessage());
+			return -1;
+        }
+    }
+
+    public Ator getAtorByID(String id){
+        String sql = String.format("SELECT * FROM ator where idator = %s", id);
+
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            Ator ator = null;
+            
+            while(rs.next()){
+                String idator = rs.getString("idator");
+                String nome =  rs.getString("nomeator");
+                String nacionalidade =  rs.getString("nacionalidade");
+                ator = new Ator(idator, nome, nacionalidade);
+            }
+            return ator;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
     public List<Ator> lista() {
 		try {
 			List<Ator> atores = new ArrayList<Ator>();

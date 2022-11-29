@@ -1,17 +1,24 @@
 package ui;
 import java.io.Console;
 
+import cdu.CDUAtualizarAtor;
 import cdu.CDURelatorio;
 import cdu.CDUcadastrarAtor;
+import dominio.Ator;
 
 public class FormAtor extends Form {
     private String id;
     private String nome;
     private String nacionalidade;
     private CDUcadastrarAtor cduca;
+    private CDUAtualizarAtor cduaa;
 
     public void setcduca(CDUcadastrarAtor cduca){
         this.cduca = cduca;
+    }
+
+    public void setcduaa(CDUAtualizarAtor cduaa){
+        this.cduaa = cduaa;
     }
 
     public void exibe(){
@@ -33,7 +40,7 @@ public class FormAtor extends Form {
         }
     }
 
-    public void updateAtor(){
+    public void exibeAtulizarAtor(){
         //Faz o update do ator de acordo com o que o usuário decidir mudar
         Console c = System.console();
         boolean termina = false;
@@ -44,24 +51,26 @@ public class FormAtor extends Form {
 
         while(!termina){
             id = c.readLine("ID do ator que deseja mudar os dados: ");
+            Ator ator = cduaa.getAtor(id);
             //verificação, para saber se ator existe no banco de dados
-            if(id == this.getid()){
+            if(ator.getid().equals(id)){
+                System.out.println(ator);
                 updt = c.readLine("O que deseja mudar deste ator? Digite (No)me ou (Na)cionalidade: ");
                 if(updt.equals("No")){
                     nome = c.readLine("Qual o novo nome do ator? ");
                 }else if(updt.equals("Na")){
                     nacionalidade = c.readLine("Qual a nova nacionalidade do ator? ");
                 }
-                
+                cduaa.atualizarAtor();
             }else{
                 System.out.println("Erro! Nome não encontrado no banco de dados, tente novamente");
                 continuar = c.readLine("Deseja tentar novamente? (s/n): ");
                 termina = continuar.toLowerCase().equals("n");
             }
-            continuar = c.readLine("Deseja mudar mais alguma coisa? (s/n): ");
+            continuar = c.readLine("Deseja mudar mais algum ator? (s/n): ");
             termina = continuar.toLowerCase().equals("n");
-            //cduca.updateAtor();
-            
+            nome = null;
+            nacionalidade = null;
         }
     }
 
