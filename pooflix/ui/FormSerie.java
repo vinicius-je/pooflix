@@ -4,17 +4,22 @@ import java.io.Console;
 import java.util.HashMap;
 
 import cdu.*;
-import dominio.Categoria;
+import dominio.*;
 
 public class FormSerie extends Form {
     private String id;
     private String titulo;
     private String idademin;
     private CDUcadastrarSerie cducs;
+    private CDUAtualizarSerie cduas;
     private HashMap<String,Categoria> categoria;
 
     public void setcdu(CDUcadastrarSerie cducs){
         this.cducs = cducs;
+    }
+
+    public void setcduas(CDUAtualizarSerie cduas){
+        this.cduas = cduas;
     }
 
     public void exibe() {
@@ -36,7 +41,7 @@ public class FormSerie extends Form {
             //Veja se tem sentido a lógica abaixo:
 
             while(!terminaCat){
-                cat = c.readLine("Qual a categoria da série? Digite (A)ção, (AV)entura, (C)omedia, (D)rama, (V)iolencia, (S)exo, (L)inguagem");
+                cat = c.readLine("Qual a categoria da série? Digite (A)ção, (AV)entura, (C)omedia, (D)rama, (V)iolencia, (S)exo, (L)inguagem: ");
 
                 //loop que pega o input do usuário e de acordo com o que ele decidir, adiciona-se no hashmap que tem como chave o id da série e o conteúdo é a o a categoria
                 switch(cat){
@@ -68,7 +73,7 @@ public class FormSerie extends Form {
         }
     }
 
-    public void updateSerie(){
+    public void exibeAtulizarSerie(){
         //Faz o update de série de acordo com o que o usuário decidir mudar
         Console c = System.console();
         boolean termina = false;
@@ -80,25 +85,30 @@ public class FormSerie extends Form {
         while(!termina){
             id = c.readLine("ID da série que deseja mudar os dados: ");
             //verificação, para saber se personagem existe no banco de dados
-            if(id.equals(this.getid())){
+            Serie serie = cduas.getSerie(id);
+            if(id.equals(serie.getid())){
+                System.out.println(serie);
                 updt = c.readLine("O que deseja mudar desta série? Digite (T)itulo, (I)dade mínima: ");
                 
                 if(updt.equals("T")){
                     titulo = c.readLine("Qual será o novo título dessa série? ");
+                    idademin = "0";
                     //Precisa verificar se o titulo da série tem o mesmo nome que outros do banco de dados? 
                 }else if(updt.equals("I")){
                     idademin = c.readLine("Qual será a nova idade mínima dessa série? ");
 
                 }
+                cduas.atualizarSerie();
             }else{
                 System.out.println("Erro! ID não encontrado no banco de dados, tente novamente");
-                continuar = c.readLine("Deseja tentar novamente? (s/n): ");
-                termina = continuar.toLowerCase().equals("n");  
+                // continuar = c.readLine("Deseja tentar novamente? (s/n): ");
+                // termina = continuar.toLowerCase().equals("n");  
             }
+            continuar = c.readLine("Deseja mudar mais alguma coisa? (s/n): ");
+            termina = continuar.toLowerCase().equals("n");
+            titulo = null;
+            idademin = null;
         }
-        continuar = c.readLine("Deseja mudar mais alguma coisa? (s/n): ");
-        termina = continuar.toLowerCase().equals("n");
-
         //cducs.updateSerie();
     }
 

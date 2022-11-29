@@ -26,6 +26,46 @@ public class DAOSerie {
         }
     }
 
+    public int update(OBJPOOFlix obj){
+        try {
+            Serie serie = (Serie) obj;	
+            String sql = null;
+
+            if(serie.gettitulo() != null)
+                sql = String.format("UPDATE serie set tituloserie = '"+ serie.gettitulo() +"' where idserie = " + serie.getid());
+            if(serie.getClassEtaria() != 0)
+                sql = String.format("UPDATE serie set idade = '"+ serie.getClassEtaria() +"' where idserie = " + serie.getid());
+            
+            Statement st = connection.createStatement();
+            st.execute(sql);
+            return 0;
+        } catch (SQLException e) {
+            System.out.println("Problemas em DAOSerie.update" + e.getMessage());
+			return -1;
+        }
+    }
+
+    public Serie getSerieByID(String id){
+        String sql = String.format("SELECT * FROM serie where idserie = %s", id);
+
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            Serie serie = null;
+            
+            while(rs.next()){
+                String idserie = rs.getString("idserie");
+                String tituloserie =  rs.getString("tituloserie");
+                int idade = Integer.parseInt(rs.getString("idade"));
+                serie = new Serie(idserie, tituloserie, idade);
+            }
+            return serie;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
     public List<Serie> lista() {
 		try {
 			List<Serie> series = new ArrayList<Serie>();

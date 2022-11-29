@@ -5,6 +5,7 @@ import java.sql.Connection;
 import ui.FormAtor;
 import ui.FormAtualizacao;
 import ui.FormPersonagem;
+import ui.FormSerie;
 
 public class CDUAtualizacao {
     private FormAtualizacao formAtualizacao;
@@ -22,20 +23,30 @@ public class CDUAtualizacao {
 
     public void processaOpcao(String opcao){
         switch(opcao) {
-            case "1": ; break;
-            case "2": ; break;
-            case "3": atualizaAtor(); break;
-            case "4": atualizaPersonagem(); break;
+            case "1": atualizarSerie(); break;
+            case "2": atualizarEpisodio(); break;
+            case "3": atualizarAtor(); break;
+            case "4": atualizarPersonagem(); break;
         }
     }
 
-    public void atualizaAtor(){
+    public void atualizarSerie(){
+        FormSerie formSerie = new FormSerie();
+        CDUAtualizarSerie casoUsoSerie = new CDUAtualizarSerie(formSerie, con);
+        casoUsoSerie.exec();
+    }
+
+    public void atualizarEpisodio(){
+        
+    }
+
+    public void atualizarAtor(){
         FormAtor formAtor = new FormAtor();
         CDUAtualizarAtor casoUsoAtor = new CDUAtualizarAtor(formAtor, con);
         casoUsoAtor.exec();
     }
 
-    public void atualizaPersonagem(){
+    public void atualizarPersonagem(){
         FormPersonagem formPersonagem = new FormPersonagem();
         CDUAtualizarPersonagem casoUsoPersonagem = new CDUAtualizarPersonagem(formPersonagem, con);
         casoUsoPersonagem.exec();
