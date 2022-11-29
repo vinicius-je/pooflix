@@ -45,7 +45,7 @@ public class FormAtor extends Form {
         }
     }
 
-    public void exibeAtulizarAtor(){
+    public void exibeAtualizarAtor(){
         //Faz o update do ator de acordo com o que o usuário decidir mudar
         Console c = System.console();
         boolean termina = false;

@@ -19,7 +19,7 @@ public class CDUAtualizarSerie {
     }
 
     public void exec(){
-        formSerie.exibeAtulizarSerie();
+        formSerie.exibeAtualizarSerie();
     }
 
     public Serie getSerie(String id){

@@ -78,7 +78,7 @@ public class FormSerie extends Form {
         }
     }
 
-    public void exibeAtulizarSerie(){
+    public void exibeAtualizarSerie(){
         //Faz o update de série de acordo com o que o usuário decidir mudar
         Console c = System.console();
         boolean termina = false;
