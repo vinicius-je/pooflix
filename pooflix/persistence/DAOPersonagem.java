@@ -62,6 +62,18 @@ public class DAOPersonagem {
         }
     }
 
+    public int remove(String id){
+        try {
+            String sql = String.format("DELETE FROM personagem WHERE idpersonagem = " + id);
+            Statement st = connection.createStatement();
+            st.execute(sql);
+            return 0;
+        } catch (SQLException e) {
+            System.out.println("Problemas em DAOPersonagem.remove" + e.getMessage());
+			return -1;
+        }
+    }
+
     public List<Personagem> lista() {
 		try {
 			List<Personagem> personagens = new ArrayList<Personagem>();

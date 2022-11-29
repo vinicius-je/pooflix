@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import ui.FormAtor;
 import ui.FormExclusao;
+import ui.FormPersonagem;
 import ui.FormSerie;
 
 public class CDUExclusao {
@@ -41,11 +42,13 @@ public class CDUExclusao {
 
     public void excluirAtor(){
         FormAtor formAtor = new FormAtor();
-        CDUExcluirAtor casuUsoAtor = new CDUExcluirAtor(formAtor, con);
-        casuUsoAtor.exec();
+        CDUExcluirAtor casoUsoAtor = new CDUExcluirAtor(formAtor, con);
+        casoUsoAtor.exec();
     }
 
     public void excluirPersonagem(){
-        
+        FormPersonagem formPersonagem = new FormPersonagem();
+        CDUExcluirPersonagem casoUsoPersonagem = new CDUExcluirPersonagem(formPersonagem, con);
+        casoUsoPersonagem.exec();
     }
 }

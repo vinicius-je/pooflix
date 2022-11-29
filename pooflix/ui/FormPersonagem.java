@@ -2,6 +2,7 @@ package ui;
 import java.io.Console;
 
 import cdu.CDUAtualizarPersonagem;
+import cdu.CDUExcluirPersonagem;
 import cdu.CDUcadastrarPersonagem;
 import dominio.Personagem;
 
@@ -10,6 +11,7 @@ public class FormPersonagem extends Form {
     private String nome;
     private CDUcadastrarPersonagem cdupe;
     private CDUAtualizarPersonagem cduap;
+    private CDUExcluirPersonagem cduep;
 
     public void setcdupe(CDUcadastrarPersonagem cdupe){
         this.cdupe = cdupe;
@@ -17,6 +19,10 @@ public class FormPersonagem extends Form {
 
     public void setcduap(CDUAtualizarPersonagem cduap){
         this.cduap = cduap;
+    }
+
+    public void setcduep(CDUExcluirPersonagem cduep){
+        this.cduep = cduep;
     }
 
     public void exibe(){
@@ -72,20 +78,19 @@ public class FormPersonagem extends Form {
 
     }
 
-    public void deletePersonagem(){
+    public void exibeDeletarPersonagem(){
         //Deleta um personagem do banco de dados
         Console c = System.console();
-        String del;
 
         System.out.println("DELETANDO PERSONAGEM\n");
 
-        id = c.readLine("ID do personagem que deseja deletar do banco de dados");
+        id = c.readLine("ID do personagem que deseja deletar do banco de dados: ");
+        Personagem personagem = cduep.getPersonagem(id);
         //verificando se o id existe no banco de dados
-        if(id.equals(this.getid())){
-            //cduca.deletePersonagem();
-            System.out.printf("Personagem %d deletado com sucesso do banco de dados..", this.getnome());
+        if(id.equals(personagem.getid())){
+            System.out.println(personagem);
+            cduep.deletarPersonagem();
         }
-
     }
 
     public String getid(){
