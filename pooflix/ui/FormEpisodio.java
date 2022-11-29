@@ -12,7 +12,7 @@ public class FormEpisodio extends Form{
     private String resumo;
     private CDUcadastrarEpis cduce;
     private CDUAtualizarEpisodio cduae;
-    private CDUExcluirSerie cduea;
+    private CDUExcluirEpisodio cduep;
 
     public void setcdu(CDUcadastrarEpis cduce){
         this.cduce = cduce;
@@ -22,8 +22,8 @@ public class FormEpisodio extends Form{
         this.cduae = cduae;
     }
 
-    public void setcduea(CDUExcluirSerie cduea){
-        this.cduea = cduea;
+    public void setcduep(CDUExcluirEpisodio cduep){
+        this.cduep = cduep;
     }
 
     public void exibe(){
@@ -122,18 +122,18 @@ public class FormEpisodio extends Form{
 
     }
 
-    public void deleteEpisodio(){
+    public void exibeDeletarEpisodio(){
         //Deleta um ator do banco de dados
         Console c = System.console();
-        String del;
 
         System.out.println("DELETANDO EPISÓDIO\n");
 
         id = c.readLine("ID do episódio que deseja deletar do banco de dados");
+        Episodio episodio = cduep.getEpisodio(id);
         //verificando se o id existe no banco de dados
-        if(id.equals(this.getid())){
-            //cduca.deleteEpisodio();
-            System.out.printf("Episódio %s deletado com sucesso do banco de dados..", this.gettitulo());
+        if(id.equals(episodio.getid())){
+            System.out.println(episodio);
+            cduep.deletarEpisodio();        
         }
 
     }

@@ -46,6 +46,18 @@ public class DAOEpisodio {
         }
     }
 
+    public int remove(String id){
+        try {
+            String sql = String.format("DELETE FROM episodio WHERE idepisodio = " + id);
+            Statement st = connection.createStatement();
+            st.execute(sql);
+            return 0;
+        } catch (SQLException e) {
+            System.out.println("Problemas em DAOEpisodio.remove" + e.getMessage());
+			return -1;
+        }
+    }
+
     public Episodio getEpisodioByID(String id){
         String sql = String.format("SELECT * FROM episodio where idepisodio = %s", id);
 

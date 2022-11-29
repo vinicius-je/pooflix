@@ -3,6 +3,7 @@ package cdu;
 import java.sql.Connection;
 
 import ui.FormAtor;
+import ui.FormEpisodio;
 import ui.FormExclusao;
 import ui.FormPersonagem;
 import ui.FormSerie;
@@ -37,7 +38,9 @@ public class CDUExclusao {
     }
 
     public void excluirEpisodio(){
-
+        FormEpisodio formEpisodio = new FormEpisodio();
+        CDUExcluirEpisodio casoUsoEpisodio = new CDUExcluirEpisodio(formEpisodio, con);
+        casoUsoEpisodio.exec();
     }
 
     public void excluirAtor(){
