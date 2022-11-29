@@ -2,6 +2,7 @@ package ui;
 
 import java.io.Console;
 import cdu.*;
+import dominio.Episodio;
 
 public class FormEpisodio extends Form{
     private String id;
@@ -10,9 +11,14 @@ public class FormEpisodio extends Form{
     private String titulo;
     private String resumo;
     private CDUcadastrarEpis cduce;
+    private CDUAtualizarEpisodio cduae;
 
     public void setcdu(CDUcadastrarEpis cduce){
         this.cduce = cduce;
+    }
+
+    public void setcduae(CDUAtualizarEpisodio cduae){
+        this.cduae = cduae;
     }
 
     public void exibe(){
@@ -67,7 +73,7 @@ public class FormEpisodio extends Form{
         } 
     } 
 
-    public void updateEpisodio(){
+    public void exibeAtualizarEpisodio(){
         //Faz o update de episódio de acordo com o que o usuário decidir mudar
         Console c = System.console();
         boolean termina = false;
@@ -78,28 +84,33 @@ public class FormEpisodio extends Form{
 
         while(!termina){
             id = c.readLine("ID do episódio que deseja mudar os dados: ");
+            Episodio ep = cduae.getEpisodio(id);
             //verificação, para saber se id de episódio existe no banco de dados
-            if(id.equals(this.getid())){
-               updt = c.readLine("O que deseja mudar deste episódio? Digite (Te)mporada, (Ti)tulo, (R)esumo: ");
-               if(updt.equals("Te")){
-                idserie = c.readLine("Qual será o novo nome/id da temporada? ");
-                if(temporada.equals(this.gettemporada())){
-                    idserie = c.readLine("Esse nome/id de temporada já existe no banco de dados, tente outro: ");
-                }
-
-               }else if(updt.equals("Ti")){
+            if(id.equals(ep.getid())){
+                System.out.println(ep);
+                updt = c.readLine("O que deseja mudar deste episódio? Digite (Te)mporada, (Ti)tulo, (R)esumo: ");
+                if(updt.equals("Te")){
+                    temporada = c.readLine("Qual será o novo nome/id da temporada? ");
+                    if(temporada.equals(ep.gettemporada())){
+                        temporada = c.readLine("Esse nome/id de temporada já existe no banco de dados, tente outro: ");
+                    }
+                }else if(updt.equals("Ti")){
                 titulo = c.readLine("Qual será o novo título do episódio? ");
                 //Precisa verificar se o título já existe no banco de dados ou não?
-               }else if(updt.equals("R")){
+                }else if(updt.equals("R")){
                 resumo = c.readLine("Qual será o novo resumo desse episódio? ");
-               }
+                }
+                cduae.atualizarEpisodio();
             }else{
                 System.out.println("Erro! ID não encontrado no banco de dados, tente novamente");
-                continuar = c.readLine("Deseja tentar novamente? (s/n): ");
-                termina = continuar.toLowerCase().equals("n");  
+                // continuar = c.readLine("Deseja tentar novamente? (s/n): ");
+                // termina = continuar.toLowerCase().equals("n");  
             }
             continuar = c.readLine("Deseja mudar mais alguma coisa? (s/n): ");
             termina = continuar.toLowerCase().equals("n");
+            temporada = null;
+            titulo = null;
+            resumo = null;
         }
 
         //cduce.updateEpisodio();

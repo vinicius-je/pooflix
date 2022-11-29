@@ -25,6 +25,51 @@ public class DAOEpisodio {
         }
     }
 
+    public int update(OBJPOOFlix obj){
+        try {
+            Episodio episodio = (Episodio) obj;	
+            String sql = null;
+
+            if(episodio.gettemporada() != null)
+                sql = String.format("UPDATE episodio set temporada = '"+ episodio.gettemporada() +"' where idepisodio = " + episodio.getid());
+            if(episodio.gettitulo() != null)
+                sql = String.format("UPDATE episodio set tituloepisodio	= '"+ episodio.gettitulo() +"' where idepisodio = " + episodio.getid());
+            if(episodio.getresumo() != null)
+                sql = String.format("UPDATE episodio set resumo = '"+ episodio.getresumo() +"' where idepisodio = " + episodio.getid());
+            
+            Statement st = connection.createStatement();
+            st.execute(sql);
+            return 0;
+        } catch (SQLException e) {
+            System.out.println("Problemas em DAOEpisodio.update" + e.getMessage());
+			return -1;
+        }
+    }
+
+    public Episodio getEpisodioByID(String id){
+        String sql = String.format("SELECT * FROM episodio where idepisodio = %s", id);
+
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            Episodio episodio = null;
+            
+            while(rs.next()){
+                String idepisodio = rs.getString("idepisodio");
+                String idserie = rs.getString("fk_idserie");
+                String temporada = rs.getString("temporada");
+                String tituloepisodio = rs.getString("tituloepisodio");
+                String resumo = rs.getString("resumo");
+
+                episodio = new Episodio(idepisodio, tituloepisodio, temporada, resumo, idserie);
+            }
+            return episodio;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
     public List<Episodio> lista() {
 		try {
 			List<Episodio> episodios = new ArrayList<Episodio>();

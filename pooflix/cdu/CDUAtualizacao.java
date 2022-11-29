@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import ui.FormAtor;
 import ui.FormAtualizacao;
+import ui.FormEpisodio;
 import ui.FormPersonagem;
 import ui.FormSerie;
 
@@ -37,7 +38,9 @@ public class CDUAtualizacao {
     }
 
     public void atualizarEpisodio(){
-        
+        FormEpisodio formEpisodio = new FormEpisodio();
+        CDUAtualizarEpisodio casoUsoEpisodio = new CDUAtualizarEpisodio(formEpisodio, con);
+        casoUsoEpisodio.exec();
     }
 
     public void atualizarAtor(){
