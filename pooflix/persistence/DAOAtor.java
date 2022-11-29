@@ -45,6 +45,18 @@ public class DAOAtor {
         }
     }
 
+    public int remove(String id){
+        try {
+            String sql = String.format("DELETE FROM ator WHERE idator = " + id);
+            Statement st = connection.createStatement();
+            st.execute(sql);
+            return 0;
+        } catch (SQLException e) {
+            System.out.println("Problemas em DAOAtor.remove" + e.getMessage());
+			return -1;
+        }
+    }
+
     public Ator getAtorByID(String id){
         String sql = String.format("SELECT * FROM ator where idator = %s", id);
 

@@ -12,6 +12,7 @@ public class FormEpisodio extends Form{
     private String resumo;
     private CDUcadastrarEpis cduce;
     private CDUAtualizarEpisodio cduae;
+    private CDUExcluirSerie cduea;
 
     public void setcdu(CDUcadastrarEpis cduce){
         this.cduce = cduce;
@@ -19,6 +20,10 @@ public class FormEpisodio extends Form{
 
     public void setcduae(CDUAtualizarEpisodio cduae){
         this.cduae = cduae;
+    }
+
+    public void setcduea(CDUExcluirSerie cduea){
+        this.cduea = cduea;
     }
 
     public void exibe(){

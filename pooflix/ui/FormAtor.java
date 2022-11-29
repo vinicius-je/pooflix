@@ -2,6 +2,7 @@ package ui;
 import java.io.Console;
 
 import cdu.CDUAtualizarAtor;
+import cdu.CDUExcluirAtor;
 import cdu.CDUcadastrarAtor;
 import dominio.Ator;
 
@@ -11,6 +12,7 @@ public class FormAtor extends Form {
     private String nacionalidade;
     private CDUcadastrarAtor cduca;
     private CDUAtualizarAtor cduaa;
+    private CDUExcluirAtor cduea;
 
     public void setcduca(CDUcadastrarAtor cduca){
         this.cduca = cduca;
@@ -18,6 +20,10 @@ public class FormAtor extends Form {
 
     public void setcduaa(CDUAtualizarAtor cduaa){
         this.cduaa = cduaa;
+    }
+
+    public void setcduea(CDUExcluirAtor cduea){
+        this.cduea = cduea;
     }
 
     public void exibe(){
@@ -73,18 +79,17 @@ public class FormAtor extends Form {
         }
     }
 
-    public void deleteAtor(){
+    public void exibeDeletarAtor(){
         //Deleta um ator do banco de dados
         Console c = System.console();
-        String del;
 
         System.out.println("DELETANDO ATOR\n");
-
-        id = c.readLine("ID do ator que deseja deletar do banco de dados");
+        id = c.readLine("ID do ator que deseja deletar do banco de dados: ");
+        Ator ator = cduea.getAtor(id);
         //verificando se o id existe no banco de dados
         if(id.equals(this.getid())){
-            //cduca.deleteAtor();
-            System.out.printf("Ator %s deletado com sucesso do banco de dados..", this.getnome());
+            System.out.println(ator);
+            cduea.deletarSerie();
         }
 
     }
