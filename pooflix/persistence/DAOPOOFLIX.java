@@ -10,6 +10,6 @@ public abstract class DAOPOOFLIX {
 
     public abstract int add(OBJPOOFlix obj);
     public abstract int update(OBJPOOFlix obj);
-    public abstract int remove(OBJPOOFlix obj);
+    public abstract int remove(String id);
     public abstract List<OBJPOOFlix> lista();
 }

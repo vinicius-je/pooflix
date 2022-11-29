@@ -45,6 +45,18 @@ public class DAOSerie {
         }
     }
 
+    public int remove(String id){
+        try {
+            String sql = String.format("DELETE FROM serie WHERE idserie = " + id);
+            Statement st = connection.createStatement();
+            st.execute(sql);
+            return 0;
+        } catch (SQLException e) {
+            System.out.println("Problemas em DAOSerie.remove" + e.getMessage());
+			return -1;
+        }
+    }
+
     public Serie getSerieByID(String id){
         String sql = String.format("SELECT * FROM serie where idserie = %s", id);
 

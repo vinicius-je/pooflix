@@ -12,6 +12,7 @@ public class FormSerie extends Form {
     private String idademin;
     private CDUcadastrarSerie cducs;
     private CDUAtualizarSerie cduas;
+    private CDUExcluirSerie cdues;
     private HashMap<String,Categoria> categoria;
 
     public void setcdu(CDUcadastrarSerie cducs){
@@ -20,6 +21,10 @@ public class FormSerie extends Form {
 
     public void setcduas(CDUAtualizarSerie cduas){
         this.cduas = cduas;
+    }
+
+    public void setcdues(CDUExcluirSerie cdues){
+        this.cdues = cdues;
     }
 
     public void exibe() {
@@ -112,22 +117,23 @@ public class FormSerie extends Form {
         //cducs.updateSerie();
     }
 
-    public void deleteSerie(){
+    public void exibeDeletarSerie(){
         //Deleta uma série do banco de dados
         Console c = System.console();
-        String del;
 
         System.out.println("DELETANDO SÉRIE\n");
 
-        id = c.readLine("ID da série que deseja deletar do banco de dados");
+        id = c.readLine("ID da série que deseja deletar do banco de dados: ");
+        Serie serie = cdues.getSerie(id);
         //verificando se o id existe no banco de dados
-        if(id.equals(this.getid())){
-            //cduca.deleteSerie();
-            System.out.printf("Serie %s deletada com sucesso do banco de dados..", this.gettitulo());
+        if(id.equals(serie.getid())){
+            System.out.println(serie);
+            cdues.deletarSerie();
+        }else{
+            System.out.printf("Serie não encontrada no banco de dados..");
         }
 
     }
-
 
     public String getid(){
         return id;

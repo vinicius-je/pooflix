@@ -36,7 +36,7 @@ public class CDUMain extends CDU {
             case "5": execCadPerformance(); break;
             case "6": execRelatorio(); break;
             case "7": execAtualizacao(); break;
-            case "8": ; break;
+            case "8": execExclusao(); break;
         }
     }
 
@@ -80,5 +80,11 @@ public class CDUMain extends CDU {
         FormAtualizacao formAtualizacao = new FormAtualizacao();
         CDUAtualizacao casoUsoAtualizacao = new CDUAtualizacao(formAtualizacao, con);
         casoUsoAtualizacao.exec();
+    }
+
+    public void execExclusao(){
+        FormExclusao formExclusao = new FormExclusao();
+        CDUExclusao casoUsoExclusao = new CDUExclusao(formExclusao, con);
+        casoUsoExclusao.exec();
     }
 }
