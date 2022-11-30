@@ -1,7 +1,8 @@
 package ui;
 
 import java.io.Console;
-import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import cdu.*;
 import dominio.*;
@@ -13,7 +14,7 @@ public class FormSerie extends Form {
     private CDUcadastrarSerie cducs;
     private CDUAtualizarSerie cduas;
     private CDUExcluirSerie cdues;
-    private HashMap<String,Categoria> categoria;
+    private LinkedList<Categoria> serieCategorias;
 
     public void setcdu(CDUcadastrarSerie cducs){
         this.cducs = cducs;
@@ -34,47 +35,52 @@ public class FormSerie extends Form {
         String continuarCat;
         String continuar;   
         String cat;     
+        Categoria catg = null;
+
 
         System.out.println("CADASTRANDO SÉRIE\n");
-
+        
+        //Pega todas as categorias do banco de dados
+        serieCategorias = new LinkedList<Categoria>();
+        List<Categoria> categorias = cducs.getCategorias();
+        
         while(!termina){
             id = c.readLine("ID: ");
             titulo = c.readLine("Titulo: ");
             idademin = c.readLine("Idade mínima: ");
+
+            for(Categoria categoria : categorias){
+                System.out.println(categoria);
+            }
 
             //Categoria aqui
             //Veja se tem sentido a lógica abaixo:
 
             while(!terminaCat){
                 cat = c.readLine("Qual a categoria da série? Digite (A)ção, (AV)entura, (C)omedia, (D)rama, (V)iolencia, (S)exo, (L)inguagem: ");
-
                 //loop que pega o input do usuário e de acordo com o que ele decidir, adiciona-se no hashmap que tem como chave o id da série e o conteúdo é a o a categoria
                 switch(cat){
-                    case "A": categoria.put(id, Categoria.ACAO);break;
-                    case "AV": categoria.put(id, Categoria.AVENTURA);break;
-                    case "C": categoria.put(id, Categoria.COMEDIA);break;
-                    case "D": categoria.put(id, Categoria.DRAMA);break;
-                    case "V": categoria.put(id, Categoria.VIOLENCIA);break;
-                    case "S": categoria.put(id, Categoria.SEXO);break;
-                    case "L": categoria.put(id, Categoria.LINGUAGEM);break;
-
+                    case "A": catg = new Categoria(categorias.get(0).getid(), null); break;
+                    case "AV": catg = new Categoria(categorias.get(1).getid(), null); break;
+                    case "C": catg = new Categoria(categorias.get(2).getid(), null); break;
+                    case "D": catg = new Categoria(categorias.get(3).getid(), null); break;
+                    case "V": catg = new Categoria(categorias.get(4).getid(), null); break;
+                    case "S": catg = new Categoria(categorias.get(5).getid(), null); break;
+                    case "L": catg = new Categoria(categorias.get(6).getid(), null); break;
                 }
+                //Adiciona categoria na lista de categorias
+                serieCategorias.add(catg);
                 //Perguntando se o usuário deseja inserir mais uma categoria na série
                 continuarCat = c.readLine("Deseja adicionar mais categorias a série?(s/n): ");
                 terminaCat = continuarCat.toLowerCase().equals("n");
 
             }
             
-        
-            
-            
-
             continuar = c.readLine("Deseja continuar?(s/n): ");
             termina = continuar.toLowerCase().equals("n");
             // Remover esse (if), pois o mesmo não permite salvar a última série cadastrada
 
             cducs.salvarSerie();
-            
         }
     }
 
@@ -147,7 +153,7 @@ public class FormSerie extends Form {
         return idademin;
     }
 
-    public HashMap<String,Categoria> getcategoria(){
-        return categoria;
+    public LinkedList<Categoria> getcategoria(){
+        return serieCategorias;
     }
 }

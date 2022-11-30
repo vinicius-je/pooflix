@@ -22,18 +22,18 @@ public class Serie implements OBJPOOFlix {
         episodios.put(e.getid(),e);
     }
 
-    public void setcategoria(Categoria cat){
-        categorias.add(cat);
-    }
+    // public void setcategoria(Categoria cat){
+    //     categorias.add(cat);
+    // }
 
-    public String[] getcategorias(){
-        String[] array = new String[categorias.size()];
+    // public String[] getcategorias(){
+    //     String[] array = new String[categorias.size()];
 
-        for(int i=0; i < categorias.size(); i++)
-            array[i] = String.valueOf(categorias.get(i));
+    //     for(int i=0; i < categorias.size(); i++)
+    //         array[i] = String.valueOf(categorias.get(i));
 
-        return array;
-    }
+    //     return array;
+    // }
 
     public String getid(){
         return id;
@@ -45,6 +45,14 @@ public class Serie implements OBJPOOFlix {
 
     public int getClassEtaria(){
         return classetaria;
+    }
+
+    public LinkedList<Categoria> getCategorias(){
+        return categorias;
+    }
+
+    public void setCategorias(LinkedList<Categoria> categoria){
+        this.categorias = categoria;
     }
 
     public String toString(){ 

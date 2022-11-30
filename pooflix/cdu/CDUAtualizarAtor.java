@@ -17,7 +17,7 @@ public class CDUAtualizarAtor {
     }
 
     public void exec(){
-        formAtor.exibeAtulizarAtor();
+        formAtor.exibeAtualizarAtor();
     }
 
     public Ator getAtor(String id){
