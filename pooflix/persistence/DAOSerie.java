@@ -2,6 +2,7 @@ package persistence;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import dominio.*;
@@ -88,7 +89,22 @@ public class DAOSerie {
 				String id = rs.getString("idSerie");
 				String titulo = rs.getString("tituloSerie");
                 int classeEtaria = Integer.valueOf(rs.getString("idade"));
+
+                // Busca pela categoria da série
+                String catg = "select fk_idserie, fk_idcategoria, tipo from categserie inner join categoria on(categserie.fk_idcategoria = categoria.idCategoria and categserie.fk_idserie = " + id + ")";
+                st = connection.createStatement();
+                ResultSet rsCatg = st.executeQuery(catg);
+
+                LinkedList<Categoria> serieCategorias = new LinkedList<Categoria>();
+                Categoria categoria = null;
+                while(rsCatg.next()){
+                    categoria = new Categoria(rsCatg.getString("fk_idcategoria"), rsCatg.getString("tipo"));
+                    serieCategorias.add(categoria);
+                }
+
+
 				Serie serie = new Serie(id,titulo,classeEtaria);
+                serie.setCategorias(serieCategorias);
 				
 				series.add(serie);
 			}

@@ -56,10 +56,16 @@ public class Serie implements OBJPOOFlix {
     }
 
     public String toString(){ 
+        String serieCategorias = "";
+        for(Categoria cat : categorias) 
+            serieCategorias += cat.getnome() + ","; 
+        //Remove a última vírgula
+        serieCategorias = serieCategorias.substring(0, serieCategorias.length() - 1);
         String s = "";
         s = "id: " + id + ";\n";
         s = s + "Titulo: " + titulo + ";\n";
         s = s + "Classe etária: " + classetaria + ";\n";
+        s = s + "Categoria: " + serieCategorias  + ";\n";
         return s;
     }
 }
