@@ -24,6 +24,7 @@ public class CDUCadastro {
             case "2": cadastrarEpisodio(); break;
             case "3": cadastrarAtor(); break;
             case "4": cadastrarPersonagem(); break;
+            case "5": cadastrarPerformance(); break;
         }
     }
 
@@ -48,6 +49,12 @@ public class CDUCadastro {
     public void cadastrarPersonagem(){
         FormPersonagem formPersonagem = new FormPersonagem();
         CDUPersonagem casoUsoPersonagem = new CDUPersonagem(formPersonagem, con);
+        casoUsoPersonagem.exec();
+    }
+
+    public void cadastrarPerformance(){
+        FormPerformance formPerformance = new FormPerformance();
+        CDUPerformance casoUsoPersonagem = new CDUPerformance(formPerformance, con);
         casoUsoPersonagem.exec();
     }
 }

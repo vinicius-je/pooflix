@@ -26,6 +26,7 @@ public class CDURelatorio extends CDU {
             case "2": queryEpisodioTable(); break;
             case "3": queryAtorTable(); break;
             case "4": queryPersonagemTable(); break;
+            case "5": queryPerformanceTable(); break;
         }
     }
 
@@ -62,6 +63,15 @@ public class CDURelatorio extends CDU {
 
         for(Personagem personagem : personagens){
             System.out.println(personagem);
+        }
+    }
+
+    public void queryPerformanceTable(){
+        DAOPerformance dao = new DAOPerformance(con);
+        List<String> performances = dao.read();
+
+        for(String performance : performances){
+            System.out.println(performance);
         }
     }
 }

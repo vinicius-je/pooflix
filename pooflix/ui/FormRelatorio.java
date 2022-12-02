@@ -23,11 +23,12 @@ public class FormRelatorio extends Form {
             System.out.println("2. Episódio");
             System.out.println("3. Ator");
             System.out.println("4. Personagem");
-            System.out.println("5. Voltar");
+            System.out.println("5. Performance");
+            System.out.println("6. Voltar");
 
             opcao = c.readLine("Digite a opção desejada: ");
 
-            termina = opcao.equals("5");
+            termina = opcao.equals("6");
 
             if(!termina)
                 cdur.processaOpcao(opcao);

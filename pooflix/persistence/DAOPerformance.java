@@ -2,6 +2,7 @@ package persistence;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import dominio.*;
@@ -26,25 +27,31 @@ public class DAOPerformance {
         }
     }
 
-    public List<OBJPOOFlix> read() {
+    public LinkedList<String> read() {
 		try {
-			List<OBJPOOFlix> performances = new ArrayList<OBJPOOFlix>();
-
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM performance");
-			while (rs.next()) {
-                String idEpisodio = rs.getString("fk_idepisodio");
-                String idPersonagem = rs.getString("fk_idpersonagem");
-                String idAtor = rs.getString("fk_idator");
+            ResultSet rs = st.executeQuery("SELECT idepisodio, tituloepisodio, idpersonagem, nomepersonagem, idator, nomeator FROM performance " +
+                                            "INNER JOIN episodio ON episodio.idepisodio = performance.fk_idepisodio " +
+                                            "INNER JOIN personagem ON personagem.idpersonagem = performance.fk_idpersonagem " +
+                                            "INNER JOIN ator ON ator.idator = performance.fk_idator");
 
-				Performance performance = new Performance(idEpisodio,idPersonagem,idAtor);
+            LinkedList<String> listaPerformances = new LinkedList<String>();
+			while (rs.next()) {
+                String idEpisodio = rs.getString("idepisodio");
+                String episodio = rs.getString("tituloepisodio");
+                String idPersonagem = rs.getString("idpersonagem");
+                String personagem = rs.getString("nomepersonagem");
+                String idAtor = rs.getString("idator");
+                String ator = rs.getString("nomeator");
+
+				String performance = String.format("Episódio(%s): %s, Personagem(%s): %s, - Ator(%s): %s", idEpisodio, episodio, idPersonagem, personagem, idAtor, ator);
 				
-				performances.add(performance);
+				listaPerformances.add(performance);
 			}
 			rs.close();
 			connection.close();
 			
-			return performances;			
+			return listaPerformances;			
 		} catch (SQLException e) {
 			System.out.println("Problemas em DAOPerformance.read" + e.getMessage());
 			return null;
