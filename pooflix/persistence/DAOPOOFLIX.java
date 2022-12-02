@@ -8,8 +8,8 @@ import dominio.OBJPOOFlix;
 public abstract class DAOPOOFLIX {
     protected Connection connection;
 
-    public abstract int add(OBJPOOFlix obj);
+    public abstract int create(OBJPOOFlix obj);
     public abstract int update(OBJPOOFlix obj);
-    public abstract int remove(String id);
-    public abstract List<OBJPOOFlix> lista();
+    public abstract int delete(String id);
+    public abstract List<OBJPOOFlix> read();
 }

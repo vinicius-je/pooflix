@@ -5,12 +5,12 @@ import dominio.*;
 import java.sql.Connection;
 import persistence.DAOPerformance;
 
-public class CDUcadastrarPerformance extends CDU{
+public class CDUPerformance extends CDU{
     private Performance performance;
     private FormPerformance formPerformance;
     Connection con;
 
-    public CDUcadastrarPerformance(FormPerformance formPerformance, Connection con){
+    public CDUPerformance(FormPerformance formPerformance, Connection con){
         this.formPerformance = formPerformance;
         this.formPerformance.setcduper(this);
         this.con = con;
@@ -27,7 +27,7 @@ public class CDUcadastrarPerformance extends CDU{
 
         performance = new Performance(episodioID, personagemID, atorID);
         DAOPerformance dao = new DAOPerformance(con);
-        int rs = dao.add(performance);
+        int rs = dao.create(performance);
         
         if(rs == 0){
             System.out.println("Performance cadastrado com sucesso!");

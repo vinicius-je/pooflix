@@ -33,25 +33,25 @@ public class CDUExclusao {
 
     public void excluirSerie(){
         FormSerie formSerie = new FormSerie();
-        CDUExcluirSerie casoUsoSerie = new CDUExcluirSerie(formSerie, con);
-        casoUsoSerie.exec();
+        CDUSerie casoUsoSerie = new CDUSerie(formSerie, con);
+        casoUsoSerie.execDelete();
     }
 
     public void excluirEpisodio(){
         FormEpisodio formEpisodio = new FormEpisodio();
-        CDUExcluirEpisodio casoUsoEpisodio = new CDUExcluirEpisodio(formEpisodio, con);
-        casoUsoEpisodio.exec();
+        CDUEpis casoUsoEpisodio = new CDUEpis(formEpisodio, con);
+        casoUsoEpisodio.execDelete();
     }
 
     public void excluirAtor(){
         FormAtor formAtor = new FormAtor();
-        CDUExcluirAtor casoUsoAtor = new CDUExcluirAtor(formAtor, con);
-        casoUsoAtor.exec();
+        CDUAtor casoUsoAtor = new CDUAtor(formAtor, con);
+        casoUsoAtor.execDelete();
     }
 
     public void excluirPersonagem(){
         FormPersonagem formPersonagem = new FormPersonagem();
-        CDUExcluirPersonagem casoUsoPersonagem = new CDUExcluirPersonagem(formPersonagem, con);
-        casoUsoPersonagem.exec();
+        CDUPersonagem casoUsoPersonagem = new CDUPersonagem(formPersonagem, con);
+        casoUsoPersonagem.execDelete();
     }
 }

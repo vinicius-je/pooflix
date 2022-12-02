@@ -2,15 +2,15 @@ package ui;
 
 import java.io.Console;
 
-import cdu.CDUcadastrarPerformance;
+import cdu.CDUPerformance;
 
 public class FormPerformance extends Form {
     private String episodioID;
     private String personagemID;
     private String atorID;
-    private CDUcadastrarPerformance cduper;
+    private CDUPerformance cduper;
 
-    public void setcduper(CDUcadastrarPerformance cduper){
+    public void setcduper(CDUPerformance cduper){
         this.cduper = cduper;
     }
 
@@ -90,7 +90,6 @@ public class FormPerformance extends Form {
     }
 
     
-
     public String getidep(){
         return episodioID;
     }

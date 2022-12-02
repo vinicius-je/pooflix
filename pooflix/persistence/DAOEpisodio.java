@@ -12,7 +12,7 @@ public class DAOEpisodio {
         this.connection = connection;
     }
 
-    public int add(OBJPOOFlix obj){
+    public int create(OBJPOOFlix obj){
         try {
             Episodio episodio = (Episodio) obj;	
             String sql = String.format("INSERT INTO episodio(idepisodio, fk_idserie, temporada, tituloepisodio, resumo) VALUES('%s', '%s', '%s', '%s', '%s')", episodio.getid(), episodio.getidserie(), episodio.gettemporada(), episodio.gettitulo(), episodio.getresumo());
@@ -20,10 +20,35 @@ public class DAOEpisodio {
             st.execute(sql);
             return 0;
         } catch (SQLException e) {
-            System.out.println("Problemas em DAOEpisodio.add" + e.getMessage());
+            System.out.println("Problemas em DAOEpisodio.create" + e.getMessage());
 			return -1;
         }
     }
+
+    public List<Episodio> read() {
+		try {
+			List<Episodio> episodios = new ArrayList<Episodio>();
+
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM episodio");
+			while (rs.next()) {
+                String idepisodio = rs.getString("idepisodio");
+                String idserie = rs.getString("fk_idserie");
+                String temporada = rs.getString("temporada");
+                String titulo = rs.getString("tituloepisodio");
+                String resumo = rs.getString("resumo");
+
+				Episodio episodio = new Episodio(idepisodio, titulo, temporada, resumo, idserie);
+				
+				episodios.add(episodio);
+			}
+			rs.close();			
+			return episodios;			
+		} catch (SQLException e) {
+			System.out.println("Problemas em DAOEpisodio.read" + e.getMessage());
+			return null;
+		}
+	}
 
     public int update(OBJPOOFlix obj){
         try {
@@ -46,14 +71,14 @@ public class DAOEpisodio {
         }
     }
 
-    public int remove(String id){
+    public int delete(String id){
         try {
             String sql = String.format("DELETE FROM episodio WHERE idepisodio = " + id);
             Statement st = connection.createStatement();
             st.execute(sql);
             return 0;
         } catch (SQLException e) {
-            System.out.println("Problemas em DAOEpisodio.remove" + e.getMessage());
+            System.out.println("Problemas em DAOEpisodio.delete" + e.getMessage());
 			return -1;
         }
     }
@@ -82,34 +107,7 @@ public class DAOEpisodio {
         }
     }
 
-    public List<Episodio> lista() {
-		try {
-			List<Episodio> episodios = new ArrayList<Episodio>();
-
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM episodio");
-			while (rs.next()) {
-                String idepisodio = rs.getString("idepisodio");
-                String idserie = rs.getString("fk_idserie");
-                String temporada = rs.getString("temporada");
-                String titulo = rs.getString("tituloepisodio");
-                String resumo = rs.getString("resumo");
-
-				Episodio episodio = new Episodio(idepisodio, titulo, temporada, resumo, idserie);
-				
-				episodios.add(episodio);
-			}
-			rs.close();
-			// connection.close();
-			
-			return episodios;			
-		} catch (SQLException e) {
-			System.out.println("Problemas em DAOEpisodio.lista" + e.getMessage());
-			return null;
-		}
-	}
-
-    public Serie getSerie(int id){
+    public Serie getSerieByID(int id){
         String sql = String.format("SELECT * FROM serie where idserie = %s", id);
 
         try {

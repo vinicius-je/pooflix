@@ -13,7 +13,7 @@ public class DAOPerformance {
         this.connection = connection;
     }
 
-    public int add(OBJPOOFlix obj){
+    public int create(OBJPOOFlix obj){
         try {
             Performance performance = (Performance) obj;	
             String sql = String.format("INSERT INTO performance(fk_idepisodio, fk_idpersonagem, fk_idator) VALUES('%s', '%s', '%s')", performance.getidep(), performance.getidperson(), performance.getidator());
@@ -21,12 +21,12 @@ public class DAOPerformance {
             st.execute(sql);
             return 0;
         } catch (SQLException e) {
-            System.out.println("Problemas em DAOPerformance.add" + e.getMessage());
+            System.out.println("Problemas em DAOPerformance.create" + e.getMessage());
 			return -1;
         }
     }
 
-    public List<OBJPOOFlix> lista() {
+    public List<OBJPOOFlix> read() {
 		try {
 			List<OBJPOOFlix> performances = new ArrayList<OBJPOOFlix>();
 
@@ -46,7 +46,7 @@ public class DAOPerformance {
 			
 			return performances;			
 		} catch (SQLException e) {
-			System.out.println("Problemas em DAOPerformance.lista" + e.getMessage());
+			System.out.println("Problemas em DAOPerformance.read" + e.getMessage());
 			return null;
 		}
 	}

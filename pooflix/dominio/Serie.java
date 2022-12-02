@@ -22,19 +22,6 @@ public class Serie implements OBJPOOFlix {
         episodios.put(e.getid(),e);
     }
 
-    // public void setcategoria(Categoria cat){
-    //     categorias.add(cat);
-    // }
-
-    // public String[] getcategorias(){
-    //     String[] array = new String[categorias.size()];
-
-    //     for(int i=0; i < categorias.size(); i++)
-    //         array[i] = String.valueOf(categorias.get(i));
-
-    //     return array;
-    // }
-
     public String getid(){
         return id;
     }
@@ -57,10 +44,18 @@ public class Serie implements OBJPOOFlix {
 
     public String toString(){ 
         String serieCategorias = "";
-        for(Categoria cat : categorias) 
-            serieCategorias += cat.getnome() + ","; 
-        //Remove a última vírgula
-        serieCategorias = serieCategorias.substring(0, serieCategorias.length() - 1);
+
+        //Verifica se a série possui mais de uma categoria
+        if(categorias.size() > 0){
+            //Concatena as categorias com vírgulas
+            for(Categoria cat : categorias) 
+                serieCategorias += cat.getnome() + ","; 
+            //Remove a vírgula no final da frase
+            serieCategorias = serieCategorias.substring(0, serieCategorias.length() - 1);
+        }else{
+            serieCategorias = categorias.get(0).getnome();
+        }
+
         String s = "";
         s = "id: " + id + ";\n";
         s = s + "Titulo: " + titulo + ";\n";

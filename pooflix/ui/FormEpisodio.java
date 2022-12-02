@@ -10,20 +10,10 @@ public class FormEpisodio extends Form{
     private String temporada;
     private String titulo;
     private String resumo;
-    private CDUcadastrarEpis cduce;
-    private CDUAtualizarEpisodio cduae;
-    private CDUExcluirEpisodio cduep;
+    private CDUEpis cdue;
 
-    public void setcdu(CDUcadastrarEpis cduce){
-        this.cduce = cduce;
-    }
-
-    public void setcduae(CDUAtualizarEpisodio cduae){
-        this.cduae = cduae;
-    }
-
-    public void setcduep(CDUExcluirEpisodio cduep){
-        this.cduep = cduep;
+    public void setcdue(CDUEpis cdue){
+        this.cdue = cdue;
     }
 
     public void exibe(){
@@ -39,7 +29,7 @@ public class FormEpisodio extends Form{
         while(!termina){
             if(leserie){
                 idserie = c.readLine("Qual série?(id): ");
-                nomeserie = cduce.getNomeSerie(Integer.parseInt(idserie));
+                nomeserie = cdue.getNomeSerie(Integer.parseInt(idserie));
                 leepisodio = nomeserie != null;
 
                 if(nomeserie == null) {
@@ -55,8 +45,13 @@ public class FormEpisodio extends Form{
                 temporada = c.readLine("@" + nomeserie + ">Temporada: ");
                 titulo = c.readLine("@" + nomeserie + ">Titulo: ");
                 resumo = c.readLine("@" + nomeserie + ">Resumo: ");
-                
-                cduce.salvarEpisodio();
+
+                if(cdue.salvarEpisodio() == 0){
+                    System.out.println("Episódio " + titulo +" cadastrado com sucesso!");
+                }else{
+                    System.out.println("Não foi possível cadastrar o episódio: "+ titulo);
+                }  
+
                 continuar = c.readLine("(S)erie (E)pisodio (T)erminar): ");
 
                 if(continuar.toLowerCase().equals("s")){
@@ -66,20 +61,18 @@ public class FormEpisodio extends Form{
                 }
                 else
                     if(continuar.toLowerCase().equals("e")){
-                        // salvar episodio no banco de dados.
-                        //cduce.salvarEpisodio(); // EM OBRAS.
                         leserie = false;
                         leepisodio = true;
                         termina = false;                    
-                    }
-                    else
+                    }else{
                        termina = true;
+                    }
             } 
         } 
     } 
 
+    //Faz o update de episódio de acordo com o que o usuário decidir mudar
     public void exibeAtualizarEpisodio(){
-        //Faz o update de episódio de acordo com o que o usuário decidir mudar
         Console c = System.console();
         boolean termina = false;
         String continuar;
@@ -89,8 +82,8 @@ public class FormEpisodio extends Form{
 
         while(!termina){
             id = c.readLine("ID do episódio que deseja mudar os dados: ");
-            Episodio ep = cduae.getEpisodio(id);
-            //verificação, para saber se id de episódio existe no banco de dados
+            Episodio ep = cdue.getEpisodio(id);
+            //Verificação, para saber se id de episódio existe no banco de dados
             if(id.equals(ep.getid())){
                 System.out.println(ep);
                 updt = c.readLine("O que deseja mudar deste episódio? Digite (Te)mporada, (Ti)tulo, (R)esumo: ");
@@ -105,11 +98,14 @@ public class FormEpisodio extends Form{
                 }else if(updt.equals("R")){
                 resumo = c.readLine("Qual será o novo resumo desse episódio? ");
                 }
-                cduae.atualizarEpisodio();
+
+                if(cdue.atualizarEpisodio() == 0){
+                    System.out.println("Episódio atualizado com sucesso!");
+                }else{
+                    System.out.println("Não foi possível atualizar o episódio!");
+                }  
             }else{
                 System.out.println("Erro! ID não encontrado no banco de dados, tente novamente");
-                // continuar = c.readLine("Deseja tentar novamente? (s/n): ");
-                // termina = continuar.toLowerCase().equals("n");  
             }
             continuar = c.readLine("Deseja mudar mais alguma coisa? (s/n): ");
             termina = continuar.toLowerCase().equals("n");
@@ -117,27 +113,27 @@ public class FormEpisodio extends Form{
             titulo = null;
             resumo = null;
         }
-
-        //cduce.updateEpisodio();
-
     }
 
+    //Deleta um ator do banco de dados
     public void exibeDeletarEpisodio(){
-        //Deleta um ator do banco de dados
         Console c = System.console();
 
         System.out.println("DELETANDO EPISÓDIO\n");
 
         id = c.readLine("ID do episódio que deseja deletar do banco de dados");
-        Episodio episodio = cduep.getEpisodio(id);
-        //verificando se o id existe no banco de dados
+        Episodio episodio = cdue.getEpisodio(id);
+        //Verifica se o id existe no banco de dados
         if(id.equals(episodio.getid())){
             System.out.println(episodio);
-            cduep.deletarEpisodio();        
+      
+            if(cdue.deletarEpisodio() == 0){
+                System.out.println("Episódio deletado com sucesso!");
+            }else{
+                System.out.println("Não foi possível deletar o episódio!");
+            }  
         }
-
     }
-
 
     public String getid() { return id;};
     public String getidserie() { return idserie;}

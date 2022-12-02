@@ -1,12 +1,9 @@
 package persistence;
 
 import java.sql.*;
+import dominio.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import dominio.Categoria;
-import dominio.OBJPOOFlix;
-import dominio.Serie;
 
 public class DAOCategoria {
     private Connection connection;
@@ -15,7 +12,7 @@ public class DAOCategoria {
         this.connection = connection;
     }
 
-	public int add(OBJPOOFlix obj){
+	public int create(OBJPOOFlix obj){
         try {
             Serie serie = (Serie) obj;	
 			String sql = "INSERT INTO categserie(fk_idserie, fk_idcategoria) VALUES";
@@ -29,12 +26,12 @@ public class DAOCategoria {
             st.execute(sql);
             return 0;
         } catch (SQLException e) {
-            System.out.println("Problemas em DAOSerie.adiciona" + e.getMessage());
+            System.out.println("Problemas em DAOSerie.create" + e.getMessage());
 			return -1;
         }
     }
 
-    public List<Categoria> lista() {
+    public List<Categoria> read() {
 		try {
 			List<Categoria> categorias = new ArrayList<Categoria>();
 
@@ -47,12 +44,10 @@ public class DAOCategoria {
 				
 				categorias.add(categoria);
 			}
-			rs.close();
-			// connection.close();
-			
+			rs.close();			
 			return categorias;			
 		} catch (SQLException e) {
-			System.out.println("Problemas em DAOCategoria.lista" + e.getMessage());
+			System.out.println("Problemas em DAOCategoria.read" + e.getMessage());
 			return null;
 		}
 	}

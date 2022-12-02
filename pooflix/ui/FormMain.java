@@ -18,19 +18,15 @@ public class FormMain extends Form {
         System.out.println("POOFlix\n");
 
         while(!termina){
-            System.out.println("1. Cadastrar Série\n");
-            System.out.println("2. Cadastrar Episódio\n");
-            System.out.println("3. Cadastrar Ator\n");
-            System.out.println("4. Cadastrar Personagem\n");
-            System.out.println("5. Cadastrar Perfomance\n");
-            System.out.println("6. Relatório\n");
-            System.out.println("7. Alteração\n");
-            System.out.println("8. Exclusao\n");
-            System.out.println("9. Sair\n");
+            System.out.println("1. Cadastrar\n");
+            System.out.println("2. Relatório\n");
+            System.out.println("3. Alteração\n");
+            System.out.println("4. Exclusao\n");
+            System.out.println("5. Sair\n");
           
             opcao = c.readLine("Digite a opção desejada: ");
 
-            termina = opcao.equals("9");
+            termina = opcao.equals("5");
 
             if(!termina)
                 cdumain.processaOpcao(opcao);    

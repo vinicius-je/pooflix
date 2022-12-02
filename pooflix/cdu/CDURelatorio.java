@@ -31,7 +31,7 @@ public class CDURelatorio extends CDU {
 
     public void querySerieTable(){
         DAOSerie dao = new DAOSerie(con);
-        List<Serie> series = dao.lista();
+        List<Serie> series = dao.read();
 
         for(Serie serie : series){
             System.out.println(serie);
@@ -40,7 +40,7 @@ public class CDURelatorio extends CDU {
 
     public void queryEpisodioTable(){
         DAOEpisodio dao = new DAOEpisodio(con);
-        List<Episodio> episodios = dao.lista();
+        List<Episodio> episodios = dao.read();
 
         for(Episodio episodio : episodios){
             System.out.println(episodio);
@@ -49,7 +49,7 @@ public class CDURelatorio extends CDU {
 
     public void queryAtorTable(){
         DAOAtor dao = new DAOAtor(con);
-        List<Ator> atores = dao.lista();
+        List<Ator> atores = dao.read();
 
         for(Ator ator : atores){
             System.out.println(ator);
@@ -58,7 +58,7 @@ public class CDURelatorio extends CDU {
 
     public void queryPersonagemTable(){
         DAOPersonagem dao = new DAOPersonagem(con);
-        List<Personagem> personagens = dao.lista();
+        List<Personagem> personagens = dao.read();
 
         for(Personagem personagem : personagens){
             System.out.println(personagem);

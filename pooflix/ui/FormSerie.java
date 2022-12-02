@@ -3,7 +3,6 @@ package ui;
 import java.io.Console;
 import java.util.LinkedList;
 import java.util.List;
-
 import cdu.*;
 import dominio.*;
 
@@ -11,21 +10,11 @@ public class FormSerie extends Form {
     private String id;
     private String titulo;
     private String idademin;
-    private CDUcadastrarSerie cducs;
-    private CDUAtualizarSerie cduas;
-    private CDUExcluirSerie cdues;
+    private CDUSerie cdus;
     private LinkedList<Categoria> serieCategorias;
 
-    public void setcdu(CDUcadastrarSerie cducs){
-        this.cducs = cducs;
-    }
-
-    public void setcduas(CDUAtualizarSerie cduas){
-        this.cduas = cduas;
-    }
-
-    public void setcdues(CDUExcluirSerie cdues){
-        this.cdues = cdues;
+    public void setcdu(CDUSerie cdus){
+        this.cdus = cdus;
     }
 
     public void exibe() {
@@ -37,12 +26,11 @@ public class FormSerie extends Form {
         String cat;     
         Categoria catg = null;
 
-
         System.out.println("CADASTRANDO SÉRIE\n");
         
         //Pega todas as categorias do banco de dados
         serieCategorias = new LinkedList<Categoria>();
-        List<Categoria> categorias = cducs.getCategorias();
+        List<Categoria> categorias = cdus.getCategorias();
         
         while(!termina){
             id = c.readLine("ID: ");
@@ -53,16 +41,13 @@ public class FormSerie extends Form {
                 System.out.println(categoria);
             }
 
-            //Categoria aqui
-            //Veja se tem sentido a lógica abaixo:
-
             while(!terminaCat){
                 cat = c.readLine("Qual a categoria da série? Digite (A)ção, (AV)entura, (C)omedia, (D)rama, (V)iolencia, (S)exo, (L)inguagem: ");
-                //loop que pega o input do usuário e de acordo com o que ele decidir, adiciona-se no hashmap que tem como chave o id da série e o conteúdo é a o a categoria
+                //Loop que pega o input do usuário e de acordo com o que ele decidir, adiciona-se na lista
                 switch(cat){
-                    case "A": catg = new Categoria(categorias.get(0).getid(), null); break;
-                    case "AV": catg = new Categoria(categorias.get(1).getid(), null); break;
-                    case "C": catg = new Categoria(categorias.get(2).getid(), null); break;
+                    case "A": catg = new Categoria(categorias.get(1).getid(), null); break;
+                    case "AV": catg = new Categoria(categorias.get(2).getid(), null); break;
+                    case "C": catg = new Categoria(categorias.get(0).getid(), null); break;
                     case "D": catg = new Categoria(categorias.get(3).getid(), null); break;
                     case "V": catg = new Categoria(categorias.get(4).getid(), null); break;
                     case "S": catg = new Categoria(categorias.get(5).getid(), null); break;
@@ -70,17 +55,18 @@ public class FormSerie extends Form {
                 }
                 //Adiciona categoria na lista de categorias
                 serieCategorias.add(catg);
-                //Perguntando se o usuário deseja inserir mais uma categoria na série
+                //Pergunta se o usuário deseja inserir mais uma categoria na série
                 continuarCat = c.readLine("Deseja adicionar mais categorias a série?(s/n): ");
                 terminaCat = continuarCat.toLowerCase().equals("n");
-
             }
-            
             continuar = c.readLine("Deseja continuar?(s/n): ");
             termina = continuar.toLowerCase().equals("n");
-            // Remover esse (if), pois o mesmo não permite salvar a última série cadastrada
 
-            cducs.salvarSerie();
+            if(cdus.salvarSerie() == 0){
+                System.out.println("Serie: "+ titulo +" cadastrada com sucesso!");
+            }else{
+                System.out.println("Não foi possível cadastrar a serie!");
+            }
         }
     }
 
@@ -95,8 +81,8 @@ public class FormSerie extends Form {
 
         while(!termina){
             id = c.readLine("ID da série que deseja mudar os dados: ");
-            //verificação, para saber se personagem existe no banco de dados
-            Serie serie = cduas.getSerie(id);
+            //Verificação, para saber se personagem existe no banco de dados
+            Serie serie = cdus.getSerie(id);
             if(id.equals(serie.getid())){
                 System.out.println(serie);
                 updt = c.readLine("O que deseja mudar desta série? Digite (T)itulo, (I)dade mínima: ");
@@ -104,41 +90,46 @@ public class FormSerie extends Form {
                 if(updt.equals("T")){
                     titulo = c.readLine("Qual será o novo título dessa série? ");
                     idademin = "0";
-                    //Precisa verificar se o titulo da série tem o mesmo nome que outros do banco de dados? 
                 }else if(updt.equals("I")){
                     idademin = c.readLine("Qual será a nova idade mínima dessa série? ");
 
                 }
-                cduas.atualizarSerie();
+
+                if(cdus.atualizarSerie() == 0){
+                    System.out.println("Serie atualizada com sucesso!");
+                }else{
+                    System.out.println("Não foi possível atualizar a serie!");
+                }
             }else{
                 System.out.println("Erro! ID não encontrado no banco de dados, tente novamente");
-                // continuar = c.readLine("Deseja tentar novamente? (s/n): ");
-                // termina = continuar.toLowerCase().equals("n");  
             }
             continuar = c.readLine("Deseja mudar mais alguma coisa? (s/n): ");
             termina = continuar.toLowerCase().equals("n");
             titulo = null;
             idademin = null;
         }
-        //cducs.updateSerie();
     }
 
+    //Deleta uma série do banco de dados
     public void exibeDeletarSerie(){
-        //Deleta uma série do banco de dados
         Console c = System.console();
 
         System.out.println("DELETANDO SÉRIE\n");
 
         id = c.readLine("ID da série que deseja deletar do banco de dados: ");
-        Serie serie = cdues.getSerie(id);
+        Serie serie = cdus.getSerie(id);
         //verificando se o id existe no banco de dados
         if(id.equals(serie.getid())){
             System.out.println(serie);
-            cdues.deletarSerie();
+
+            if(cdus.deletarSerie() == 0){
+                System.out.println("Serie deletada com sucesso!");
+            }else{
+                System.out.println("Não foi possível deletar a serie!");
+            }
         }else{
             System.out.printf("Serie não encontrada no banco de dados..");
         }
-
     }
 
     public String getid(){

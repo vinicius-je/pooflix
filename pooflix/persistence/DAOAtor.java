@@ -3,7 +3,6 @@ package persistence;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
 import dominio.*;
 
 public class DAOAtor {
@@ -13,7 +12,7 @@ public class DAOAtor {
         this.connection = connection;
     }
 
-    public int add(OBJPOOFlix obj){
+    public int create(OBJPOOFlix obj){
         try {
             Ator ator = (Ator) obj;	
             String sql = String.format("INSERT INTO ator(idAtor, nomeAtor, nacionalidade) VALUES('%s', '%s', '%s')", ator.getid(), ator.getnome(), ator.getnacionalidade());
@@ -21,10 +20,32 @@ public class DAOAtor {
             st.execute(sql);
             return 0;
         } catch (SQLException e) {
-            System.out.println("Problemas em DAOAtor.add" + e.getMessage());
+            System.out.println("Problemas em DAOAtor.create" + e.getMessage());
 			return -1;
         }
     }
+
+    public List<Ator> read() {
+		try {
+			List<Ator> atores = new ArrayList<Ator>();
+
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM ator");
+			while (rs.next()) {
+                String id = rs.getString("idAtor");
+                String nome = rs.getString("nomeAtor");
+                String nacionalidade = rs.getString("nacionalidade");
+				Ator ator = new Ator(id,nome,nacionalidade);
+				
+				atores.add(ator);
+			}
+			rs.close();			
+			return atores;			
+		} catch (SQLException e) {
+			System.out.println("Problemas em DAOAtor.read" + e.getMessage());
+			return null;
+		}
+	}
 
     public int update(OBJPOOFlix obj){
         try {
@@ -45,14 +66,14 @@ public class DAOAtor {
         }
     }
 
-    public int remove(String id){
+    public int delete(String id){
         try {
             String sql = String.format("DELETE FROM ator WHERE idator = " + id);
             Statement st = connection.createStatement();
             st.execute(sql);
             return 0;
         } catch (SQLException e) {
-            System.out.println("Problemas em DAOAtor.remove" + e.getMessage());
+            System.out.println("Problemas em DAOAtor.delete" + e.getMessage());
 			return -1;
         }
     }
@@ -77,28 +98,5 @@ public class DAOAtor {
             return null;
         }
     }
-
-    public List<Ator> lista() {
-		try {
-			List<Ator> atores = new ArrayList<Ator>();
-
-            Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM ator");
-			while (rs.next()) {
-                String id = rs.getString("idAtor");
-                String nome = rs.getString("nomeAtor");
-                String nacionalidade = rs.getString("nacionalidade");
-				Ator ator = new Ator(id,nome,nacionalidade);
-				
-				atores.add(ator);
-			}
-			rs.close();
-			// connection.close();
-			
-			return atores;			
-		} catch (SQLException e) {
-			System.out.println("Problemas em DAOAtor.lista" + e.getMessage());
-			return null;
-		}
-	}
+   
 }

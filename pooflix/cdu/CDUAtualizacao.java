@@ -2,11 +2,7 @@ package cdu;
 
 import java.sql.Connection;
 
-import ui.FormAtor;
-import ui.FormAtualizacao;
-import ui.FormEpisodio;
-import ui.FormPersonagem;
-import ui.FormSerie;
+import ui.*;
 
 public class CDUAtualizacao {
     private FormAtualizacao formAtualizacao;
@@ -33,25 +29,25 @@ public class CDUAtualizacao {
 
     public void atualizarSerie(){
         FormSerie formSerie = new FormSerie();
-        CDUAtualizarSerie casoUsoSerie = new CDUAtualizarSerie(formSerie, con);
-        casoUsoSerie.exec();
+        CDUSerie casoUsoSerie = new CDUSerie(formSerie, con);
+        casoUsoSerie.execUpdate();
     }
 
     public void atualizarEpisodio(){
         FormEpisodio formEpisodio = new FormEpisodio();
-        CDUAtualizarEpisodio casoUsoEpisodio = new CDUAtualizarEpisodio(formEpisodio, con);
-        casoUsoEpisodio.exec();
+        CDUEpis casoUsoEpisodio = new CDUEpis(formEpisodio, con);
+        casoUsoEpisodio.execUpdate();
     }
 
     public void atualizarAtor(){
         FormAtor formAtor = new FormAtor();
-        CDUAtualizarAtor casoUsoAtor = new CDUAtualizarAtor(formAtor, con);
-        casoUsoAtor.exec();
+        CDUAtor casoUsoAtor = new CDUAtor(formAtor, con);
+        casoUsoAtor.execUpdate();
     }
 
     public void atualizarPersonagem(){
         FormPersonagem formPersonagem = new FormPersonagem();
-        CDUAtualizarPersonagem casoUsoPersonagem = new CDUAtualizarPersonagem(formPersonagem, con);
-        casoUsoPersonagem.exec();
+        CDUPersonagem casoUsoPersonagem = new CDUPersonagem(formPersonagem, con);
+        casoUsoPersonagem.execUpdate();
     }
 }

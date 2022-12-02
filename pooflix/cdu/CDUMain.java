@@ -29,45 +29,17 @@ public class CDUMain extends CDU {
 
     public void processaOpcao(String opcao){
         switch(opcao) {
-            case "1": execCadSerie(); break;
-            case "2": execCadEpisodio(); break;
-            case "3": execCadAtor(); break;
-            case "4": execCadPersonagem(); break;
-            case "5": execCadPerformance(); break;
-            case "6": execRelatorio(); break;
-            case "7": execAtualizacao(); break;
-            case "8": execExclusao(); break;
+            case "1": execCadastro(); break;
+            case "2": execRelatorio(); break;
+            case "3": execAtualizacao(); break;
+            case "4": execExclusao(); break;
         }
     }
 
-    public void execCadSerie(){
-        FormSerie telaSerie = new FormSerie();
-        CDUcadastrarSerie casoUsoSerie = new CDUcadastrarSerie(telaSerie, db.getConnection());
-        casoUsoSerie.exec();
-    }
-
-    public void execCadEpisodio(){
-        FormEpisodio telaEpisodio = new FormEpisodio();
-        CDUcadastrarEpis casoUsoEpis = new CDUcadastrarEpis(telaEpisodio, db.getConnection());
-        casoUsoEpis.exec();        
-    }
-
-    public void execCadAtor(){
-        FormAtor telaAtor = new FormAtor();
-        CDUcadastrarAtor casoUsoAtor = new CDUcadastrarAtor(telaAtor, db.getConnection());
-        casoUsoAtor.exec();        
-    }
-
-    public void execCadPersonagem(){
-        FormPersonagem telaPersonagem = new FormPersonagem();
-        CDUcadastrarPersonagem casoUsoPersonagem = new CDUcadastrarPersonagem(telaPersonagem, db.getConnection());
-        casoUsoPersonagem.exec();        
-    }
-
-    public void execCadPerformance(){
-        FormPerformance telaPerformance = new FormPerformance();
-        CDUcadastrarPerformance casoUsoPerformance = new CDUcadastrarPerformance(telaPerformance, db.getConnection());
-        casoUsoPerformance.exec();        
+    public void execCadastro(){
+        FormCadastro telCadastro = new FormCadastro();
+        CDUCadastro casoUsoCadastro = new CDUCadastro(telCadastro, db.getConnection());
+        casoUsoCadastro.exec();
     }
 
     public void execRelatorio(){
