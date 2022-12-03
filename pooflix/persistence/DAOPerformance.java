@@ -1,9 +1,7 @@
 package persistence;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 import dominio.*;
 
@@ -49,7 +47,6 @@ public class DAOPerformance {
 				listaPerformances.add(performance);
 			}
 			rs.close();
-			connection.close();
 			
 			return listaPerformances;			
 		} catch (SQLException e) {
