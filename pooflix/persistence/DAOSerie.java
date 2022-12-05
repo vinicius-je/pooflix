@@ -69,10 +69,15 @@ public class DAOSerie {
             Serie serie = (Serie) obj;	
             String sql = null;
 
-            if(serie.gettitulo() != null)
+            if(serie.gettitulo() != null && serie.getClassEtaria() != 0){
+                sql = String.format("UPDATE serie set tituloserie = '"+ serie.gettitulo() +"', idade = '"+ serie.getClassEtaria() +"' where idserie = " + serie.getid());
+            }else if(serie.gettitulo() != null){
                 sql = String.format("UPDATE serie set tituloserie = '"+ serie.gettitulo() +"' where idserie = " + serie.getid());
-            if(serie.getClassEtaria() != 0)
+            }else if(serie.getClassEtaria() != 0){
                 sql = String.format("UPDATE serie set idade = '"+ serie.getClassEtaria() +"' where idserie = " + serie.getid());
+            }else{
+                return -1;
+            }
             
             Statement st = connection.createStatement();
             st.execute(sql);

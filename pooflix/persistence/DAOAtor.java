@@ -51,11 +51,16 @@ public class DAOAtor {
         try {
             Ator ator = (Ator) obj;	
             String sql = null;
-
-            if(ator.getnome() != null)
+            
+            if(ator.getnome() != null && ator.getnacionalidade() != null){
+                sql = String.format("UPDATE ator set nomeator = '"+ ator.getnome() +"', nacionalidade = '" + ator.getnacionalidade() +"' where idator = " + ator.getid());
+            }else if(ator.getnome() != null)
                 sql = String.format("UPDATE ator set nomeator = '"+ ator.getnome() +"' where idator = " + ator.getid());
-            if(ator.getnacionalidade() != null)
+            else if(ator.getnacionalidade() != null)
                 sql = String.format("UPDATE ator set nacionalidade = '"+ ator.getnacionalidade() +"' where idator = " + ator.getid());
+            else{
+                return -1;
+            }
             
             Statement st = connection.createStatement();
             st.execute(sql);

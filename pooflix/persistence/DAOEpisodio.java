@@ -55,13 +55,18 @@ public class DAOEpisodio {
             Episodio episodio = (Episodio) obj;	
             String sql = null;
 
-            if(episodio.gettemporada() != null)
+            if(episodio.gettemporada() != null && episodio.gettitulo() != null && episodio.getresumo() != null){
+                sql = String.format("UPDATE episodio set temporada = '"+ episodio.gettemporada() +"', tituloepisodio = '"+ episodio.gettitulo() +"', resumo = '"+ episodio.getresumo() +"' where idepisodio = " + episodio.getid());
+            }else if(episodio.gettemporada() != null){
                 sql = String.format("UPDATE episodio set temporada = '"+ episodio.gettemporada() +"' where idepisodio = " + episodio.getid());
-            if(episodio.gettitulo() != null)
+            }else if(episodio.gettitulo() != null){
                 sql = String.format("UPDATE episodio set tituloepisodio	= '"+ episodio.gettitulo() +"' where idepisodio = " + episodio.getid());
-            if(episodio.getresumo() != null)
+            }else if(episodio.getresumo() != null){
                 sql = String.format("UPDATE episodio set resumo = '"+ episodio.getresumo() +"' where idepisodio = " + episodio.getid());
-            
+            }else{
+                return -1;
+            }
+
             Statement st = connection.createStatement();
             st.execute(sql);
             return 0;
